@@ -1,7 +1,7 @@
 /*
  * COSC1076 Assignment 1, Semester 2 2018
- * Student name  :
- * Student number:
+ * Student name  : Adrian Lim
+ * Student number: s3710625
  */
 #ifndef GAME_H
 #define GAME_H
@@ -37,6 +37,9 @@
  * and marks are allocated to good coding practices.
  */
 void game_PlayGame();
+
+void OptionInitializePlayer();
+void OptionLoadBoard(Board board);
 
 /* TODO not provided */
 

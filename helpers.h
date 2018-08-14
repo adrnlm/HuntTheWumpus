@@ -1,7 +1,7 @@
 /*
  * COSC1076 Assignment 1, Semester 2 2018
- * Student name  :
- * Student number:
+ * Student name  : Adrian Lim
+ * Student number: s3710625
  */
 #ifndef HELPERS_H
 #define HELPERS_H

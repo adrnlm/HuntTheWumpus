@@ -1,7 +1,7 @@
 /*
  * COSC1076 Assignment 1, Semester 2 2018
- * Student name  :
- * Student number:
+ * Student name  : Adrian Lim
+ * Student number: s3710625
  */
 #ifndef BOARD_H
 #define BOARD_H
@@ -18,10 +18,10 @@
 
 typedef enum cell
 {
-	board_EMPTY,		
+	board_EMPTY,
 	board_TRAVERSED, /* an empty cell player has previously visited */
-	board_BATS,		
-	board_PIT,		
+	board_BATS,
+	board_PIT,
 	board_WUMPUS,
 	board_PLAYER
 } Cell;
@@ -30,9 +30,15 @@ typedef enum cell
 #define PLAYER_OUTPUT "##"
 #define TRAVERSED_OUTPUT "**"
 
+#define PIT_OUTPUT "00"
+#define BATS_OUTPUT "^^"
+#define WUMPUS_OUTPUT "WW"
+
+
 typedef Cell Board[BOARD_HEIGHT][BOARD_WIDTH];
 
 Board BOARD_1, BOARD_2;
+
 
 typedef enum playerMove
 {
@@ -50,7 +56,7 @@ typedef enum arrowHit
 } ArrowHit;
 
 /* Note that 'board' does not use any functions from player, game or
- * huntWump and doesn't use the type 'Player' (although it does know 
+ * huntWump and doesn't use the type 'Player' (although it does know
  * about the type 'Position').
  */
 
@@ -61,10 +67,10 @@ void board_Load(Board board, Board boardToLoad);
 
 /**
  * Try to set the cell at the provided position to board_PLAYER.
- * Note that if the position is outside the bounds of the board then you 
- * should return FALSE. Returns FALSE if the position isn't empty 
+ * Note that if the position is outside the bounds of the board then you
+ * should return FALSE. Returns FALSE if the position isn't empty
  * (note empty can be a cell that has been traversed previously).
- * Return TRUE when the cell at the position is successfully set to 
+ * Return TRUE when the cell at the position is successfully set to
  * board_PLAYER.
  */
 Boolean board_PlacePlayer(Board board, Position position);
@@ -74,17 +80,17 @@ Boolean board_PlacePlayer(Board board, Position position);
  * a new position.
  *
  * If this new position is outside the bounds of the board return
- * board_OUTSIDE_BOUNDS. 
+ * board_OUTSIDE_BOUNDS.
  * Note that if board_OUTSIDE_BOUNDS occurs then the board cells and
  * player position are not modified.
- * If the new position is on-top of a PIT or WUMPUS cell then return 
- * board_PLAYER_KILLED. 
+ * If the new position is on-top of a PIT or WUMPUS cell then return
+ * board_PLAYER_KILLED.
  * If the new position is on-top of a BAT, return board_BAT_CELL.
- * If the new position is board_EMPTY or board_TRAVERSED 
- * then remove PLAYER from the current player's position on the board 
+ * If the new position is board_EMPTY or board_TRAVERSED
+ * then remove PLAYER from the current player's position on the board
  * (set cell to board_TRAVERSED) and set the new position to board_PLAYER.
- * Note that in this case whatever called this function will need to 
- * update the position member of the player structure. 
+ * Note that in this case whatever called this function will need to
+ * update the position member of the player structure.
  */
 PlayerMove board_MovePlayer(Board, Position position, Position newPosition);
 
@@ -98,27 +104,27 @@ PlayerMove board_MovePlayer(Board, Position position, Position newPosition);
 ArrowHit board_FireArrow(Board, Position position);
 
 /**
- * Display the board according to the assignment specification. 
+ * Display the board according to the assignment specification.
  * Here is an example output:
 
-    0  1  2  3  4 
+    0  1  2  3  4
    ----------------
  0 |**|##|  |  |  |
-   ---------------- 
+   ----------------
  1 |  |  |  |  |  |
-   ----------------  
+   ----------------
  2 |  |  |  |  |  |
-   ---------------- 
- 3 |  |  |  |  |  |  
+   ----------------
+ 3 |  |  |  |  |  |
    ----------------
  4 |  |  |  |  |  |
-   ---------------- 
+   ----------------
  */
 void board_Display(Board board);
 
 /**
- * Display the board warnings according to the assignment specification. 
+ * Display the board warnings according to the assignment specification.
  */
-void board_DisplayWarnings(Board board, Position positon); 
+void board_DisplayWarnings(Board board, Position positon);
 
 #endif

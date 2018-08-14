@@ -1,7 +1,7 @@
 /*
  * COSC1076 Assignment 1, Semester 2 2018
- * Student name  :
- * Student number:
+ * Student name  : Adrian Lim
+ * Student number: s3710625
  */
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -47,13 +47,13 @@ void player_Initialise(Player * player, Position position);
  * current position in the specified direction.
  *
  * Note the new position can be outside the bounds of the board and could be on
- * cell that would kill the player. Also note that you should not modify 
+ * cell that would kill the player. Also note that you should not modify
  * the current position of the player.
  */
 Position player_GetNextPosition(Position position, Direction direction);
 
 /**
- * Set the player's position to the provided position. 
+ * Set the player's position to the provided position.
  */
 void player_UpdatePosition(Player * player, Position position);
 
