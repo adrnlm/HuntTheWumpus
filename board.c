@@ -80,21 +80,26 @@ void board_Display(Board board) {
 }
 
 void board_DisplayWarnings(Board board, Position position){
-   /* TODO */
-   if ( board[(position.y)][(position.x-1)] == board_PIT )
-    printf("You feel a breeze!\n");
-    else if  ( board[(position.y+1)][(position.x-1)] == board_PIT )
-     printf("You feel a breeze!\n");
-     else if  ( board[(position.y-1)][(position.x-1)] == board_PIT )
-       printf("You feel a breeze!\n");
-       else if  ( board[(position.y)][(position.x+1)] == board_PIT )
-         printf("You feel a breeze!\n");
-         else if  ( board[(position.y+1)][(position.x+1)] == board_PIT )
-           printf("You feel a breeze!\n");
-           else if  ( board[(position.y-1)][(position.x+1)] == board_PIT )
-             printf("You feel a breeze!\n");
-             else if  ( board[(position.y+1)][(position.x)] == board_PIT )
-               printf("You feel a breeze!\n");
-               else if  ( board[(position.y-1)][(position.x)] == board_PIT )
-                 printf("You feel a breeze!\n");
+  int warningType=2;
+  char *warning[]=
+  {"You hear flapping!", "You feel a breeze!", "You smell a wumpus!"};
+  do {
+    if ( board[(position.y)][(position.x-1)] == warningType )
+     printf("%s . ", warning[warningType-2]);
+     else if  ( board[(position.y+1)][(position.x-1)] == warningType )
+      printf("%s . ", warning[warningType-2]);
+      else if  ( board[(position.y-1)][(position.x-1)] == warningType )
+        printf("%s . ", warning[warningType-2]);
+        else if  ( board[(position.y)][(position.x+1)] == warningType )
+          printf("%s . ", warning[warningType-2]);
+          else if  ( board[(position.y+1)][(position.x+1)] == warningType )
+            printf("%s . ", warning[warningType-2]);
+            else if  ( board[(position.y-1)][(position.x+1)] == warningType )
+              printf("%s . ", warning[warningType-2]);
+              else if  ( board[(position.y+1)][(position.x)] == warningType )
+                printf("%s . ", warning[warningType-2]);
+                else if  ( board[(position.y-1)][(position.x)] == warningType )
+                  printf("%s . ", warning[warningType-2]);
+    warningType++;
+  } while(warningType<=4);
 }
