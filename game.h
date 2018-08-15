@@ -39,7 +39,7 @@
 void game_PlayGame();
 
 void OptionInitializePlayer();
-void OptionLoadBoard(Board board);
+void OptionLoadBoard(Board board, char userLoadChoice[6]);
 
 /* TODO not provided */
 

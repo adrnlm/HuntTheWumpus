@@ -20,8 +20,16 @@ void game_PlayGame(){
 	printf("east (or e)\n");
 	printf("west (or w)\n");
 	printf("quit\n");
-	/*printf("Enter a command: " );*/
-	OptionLoadBoard(currentBoard);
+	printf("Enter a command: " );
+
+	char userGameInput[10];
+	while ( fgets(userGameInput, 10, stdin) ) {
+		if (strncmp(userGameInput, "load 1", 6) ==0 ||
+				strncmp(userGameInput, "load 2", 6) ==0 ) {
+			OptionLoadBoard(currentBoard, userGameInput);
+			break;
+			}
+	}
 	OptionInitializePlayer(currentBoard, &playerPosition);
 	 printf(" game%d\n", playerPosition.x);
 	board_Display(currentBoard);
@@ -67,24 +75,14 @@ void OptionInitializePlayer(Board currentBoard, Position *position){
   /*printf("SUCCESS\n");*/
 }
 
-void OptionLoadBoard(Board board) {
-  int boardChoice;
-	printf("- - - - - - - - - - - - - - - - -\n");
-	printf("\nLoad board\n");
-  printf("- - - - - - - - - - - - - - - - -\n");
-  do {
-    printf("\nEnter board number: ");
-    scanf("%d", &boardChoice);
-    if (/*strcmp(boardChoice,load1)==0*/boardChoice==1){
+void OptionLoadBoard(Board board, char userLoadChoice[6]) {
+    if ( strncmp(userLoadChoice, "load 1", 6) ==0 ){
       board_Load(board, BOARD_1);
       printf("Board 1 successfully loaded\n");
     }
-    else if (/*strcmp(boardChoice,load2)==0*/boardChoice==2){
+    else {
       board_Load(board, BOARD_2);
       printf("Board 2 successfully loaded\n");
     }
-    else {
-      printf("Invalid Input\nEnter 1 or 2\n" );
-    }
-  }while(boardChoice!=1 && boardChoice!=2);
+
 }
