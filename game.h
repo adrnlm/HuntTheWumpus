@@ -22,6 +22,8 @@
 #define COMMAND_WEST_SHORTCUT "w"
 #define COMMAND_SHOOT "shoot"
 #define COMMAND_QUIT "quit"
+#define USER_MAX_INPUT 10
+#define USER_INPUT_LENGTH 6
 
 /**
  * Main menu option 1 - play the game as per the specification.

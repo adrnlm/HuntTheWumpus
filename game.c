@@ -22,10 +22,10 @@ void game_PlayGame(){
 	printf("quit\n");
 	printf("Enter a command: " );
 
-	char userGameInput[10];
-	while ( fgets(userGameInput, 10, stdin) ) {
-		if (strncmp(userGameInput, "load 1", 6) ==0 ||
-				strncmp(userGameInput, "load 2", 6) ==0 ) {
+	char userGameInput[USER_MAX_INPUT];
+	while ( fgets(userGameInput, USER_MAX_INPUT, stdin) ) {
+		if (strncmp(userGameInput, "load 1", USER_INPUT_LENGTH) ==0 ||
+				strncmp(userGameInput, "load 2", USER_INPUT_LENGTH) ==0 ) {
 			OptionLoadBoard(currentBoard, userGameInput);
 			break;
 			}
