@@ -12,6 +12,8 @@
 #define STUDENT_NAME "Adrian Lim Song En"
 #define STUDENT_ID "s3710625"
 #define STUDENT_EMAIL "s3710625@student.rmit.edu.au"
+#define USER_MAX_MENU_INPUT 1
+#define USER_MENU_INPUT_PARAMETER (USER_MAX_MENU_INPUT + EXTRA_SPACES)
 
 /**
  * Main menu option 2 - show your student information as per specification.

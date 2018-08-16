@@ -23,7 +23,8 @@
 #define COMMAND_SHOOT "shoot"
 #define COMMAND_QUIT "quit"
 #define USER_MAX_INPUT 10
-#define USER_INPUT_LENGTH 6
+#define MAXIMUM_CHAR_INPUT 5
+#define MAXIMUM_CHAR_PARAMETERS (EXTRA_SPACES + MAXIMUM_CHAR_INPUT)
 
 /**
  * Main menu option 1 - play the game as per the specification.
@@ -41,7 +42,7 @@
 void game_PlayGame();
 
 void OptionInitializePlayer();
-void OptionLoadBoard(Board board, char userLoadChoice[6]);
+void OptionLoadBoard(Board board, int userLoadChoice);
 
 /* TODO not provided */
 
