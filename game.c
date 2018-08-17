@@ -7,7 +7,7 @@
 
 void game_PlayGame(){
 	Board currentBoard;
-	char userGameInput[USER_MAX_INPUT];
+	char userLoadInput[MAXIMUM_CHAR_PARAMETERS];
 	Position playerPosition;
 	printf("\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 	printf("You can use the following commands to play the game:\n\n");
@@ -22,29 +22,37 @@ void game_PlayGame(){
 	printf("west (or w)\n");
 	printf("quit\n\n");
 
-	char * userPromt = "Enter a command:";
-	int quit = 1;
-	do {
-		quit=0;
-		getInput(userPromt, userGameInput, USER_MAX_INPUT);
-		char *firstChar = strtok(userGameInput, "., ");
+	getInput("Press return to continue...", userLoadInput, USER_MAX_INPUT);
+
+	/*char prompt[3];
+	prompt[1]="\nAt this stage of the program, only two commands are acceptable:"
+						 "\nload <g>"
+						 "\nquit ";
+	prompt[2]="\nAt this stage of the program, only two commands are acceptable:"
+						 "\ninit <x>,<y>"
+						 "\nquit ";
+	prompt[1]="\nAt this stage of the program, only three commands are acceptable:
+						 \n<direction>
+						 \nshoot <direction>
+						 \nquit ";
+*/
+while (TRUE) {
+		getInput("At this stage of the program, only two commands are acceptable:\n"
+		"load <g>\n"
+		"quit\n", userLoadInput, sizeof(userLoadInput));
+		char *firstChar = strtok(userLoadInput, "., ");
 		char *secondChar = strtok(NULL, "., ");
-		char *thirdChar = strtok(NULL, "., ");
-
-		if ( strncmp(userGameInput, "load", MAXIMUM_CHAR_PARAMETERS)==0) {
-			int userBoardChoice = atoi(secondChar);
-			OptionLoadBoard(currentBoard, userBoardChoice);
-		}
-		else if ( strncmp(userGameInput, "init", MAXIMUM_CHAR_PARAMETERS)==0 ) {
-			OptionInitializePlayer(currentBoard, playerPosition);
-		}
-		else if ( strncmp(userGameInput, "quit", MAXIMUM_CHAR_PARAMETERS)==0 ) {
-			break;
-		}
+		int boardChoice = atoi(secondChar);
+		if ( strncmp(firstChar, "load", sizeof(userLoadInput))!=0 &&
+					boardChoice!=1 || boardChoice!=2) {
+						printInvalidInput();
+						continue;
+					}
+		OptionLoadBoard(currentBoard, boardChoice);
+		break;
+}
 
 
-
-} while(quit==0);
 
 board_Display(currentBoard);
 board_DisplayWarnings(currentBoard, playerPosition);
@@ -94,12 +102,9 @@ void OptionLoadBoard(Board board, int userLoadChoice) {
       board_Load(board, BOARD_1);
       printf("Board 1 successfully loaded\n\n");
     }
-    else if (  userLoadChoice == 2 ){
+    else {
       board_Load(board, BOARD_2);
       printf("Board 2 successfully loaded\n\n");
     }
-		else {
-			printf("Invalid Board: Pick 1 or 2\n\n");
-		}
 
 }

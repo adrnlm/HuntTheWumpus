@@ -14,7 +14,7 @@
 
 
 int main() {
-  char userMenuInput[10];
+  char userMenuInput[USER_MAX_INPUT];
   int menuInput=0;
    /**
     * Here's the main function. You can write the "main menu" loop/code

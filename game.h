@@ -23,8 +23,9 @@
 #define COMMAND_SHOOT "shoot"
 #define COMMAND_QUIT "quit"
 #define USER_MAX_INPUT 10
-#define MAXIMUM_CHAR_INPUT 5
+#define MAXIMUM_CHAR_INPUT 6
 #define MAXIMUM_CHAR_PARAMETERS (EXTRA_SPACES + MAXIMUM_CHAR_INPUT)
+
 
 /**
  * Main menu option 1 - play the game as per the specification.
