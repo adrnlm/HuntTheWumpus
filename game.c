@@ -10,6 +10,8 @@ void game_PlayGame(){
 	char enterButton[USER_MAX_INPUT];
 	char userLoadInput[MAXIMUM_LOAD_PARAMETERS];
 	char userInitInput[MAXIMUM_INIT_PARAMETERS];
+	char userPlayInput[MAXIMUM_PLAY_PARAMETERS];
+	Player newPlayer;
 	Position playerPosition;
 	int quit=FALSE;
 	printf("\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
@@ -90,7 +92,8 @@ void game_PlayGame(){
 								 playerPosition.y=positionY;
 								 printf("%d\n", positionX);
 								 printf("%d\n", playerPosition.x);
-								 if ( OptionInitializePlayer(currentBoard, playerPosition)
+								 if ( OptionInitializePlayer(currentBoard, newPlayer,
+									  playerPosition)
 								 == TRUE )
 								 	break;
 								 else
@@ -124,8 +127,8 @@ void game_PlayGame(){
 	srand(0);
 }
 
-Boolean OptionInitializePlayer(Board currentBoard, Position position){
-	Player newPlayer;
+Boolean OptionInitializePlayer(Board currentBoard, Player newPlayer,
+	Position position){
 	player_Initialise(&newPlayer, position);
 	if ( board_PlacePlayer(currentBoard,position)==TRUE) {
 		printf("Player Initialized\n");
