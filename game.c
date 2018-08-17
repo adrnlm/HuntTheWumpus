@@ -9,7 +9,7 @@ void game_PlayGame(){
 	Board currentBoard;
 	char userLoadInput[MAXIMUM_CHAR_PARAMETERS];
 	Position playerPosition;
-	int quit=0;
+	int quit=FALSE;
 	printf("\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 	printf("You can use the following commands to play the game:\n\n");
 	printf("load <g>\n");
@@ -24,15 +24,15 @@ void game_PlayGame(){
 	printf("quit\n\n");
 
 	getInput("Press enter to continue...", userLoadInput, sizeof(userLoadInput));
-
-	while (quit==0) {
+	/*The load option*/
+	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"load <g>\n"
 		"quit\n", userLoadInput, sizeof(userLoadInput));
 		char *firstChar = strtok(userLoadInput, "., ");
 		if ( firstChar != NULL ){
 			if ( strncmp(firstChar, "quit", sizeof(userLoadInput)) == 0) {
-				quit = 1;
+				quit = TRUE;
 				break;
 			}
 			else {
@@ -59,15 +59,13 @@ void game_PlayGame(){
 			printInvalidInput();
 			continue;
 		}
-
-
 	}
 
-while (quit==0) {
-	getInput("At this stage of the program, only two commands are acceptable:\n"
-	"init <x>,<y>\n"
-	"quit\n", userLoadInput, sizeof(userLoadInput));
-}
+	while (quit==FALSE) {
+		getInput("At this stage of the program, only two commands are acceptable:\n"
+		"init <x>,<y>\n"
+		"quit\n", userLoadInput, sizeof(userLoadInput));
+	}
 /*
 OptionInitializePlayer(currentBoard, playerPosition);
 
