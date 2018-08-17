@@ -9,6 +9,7 @@ void game_PlayGame(){
 	Board currentBoard;
 	char userLoadInput[MAXIMUM_CHAR_PARAMETERS];
 	Position playerPosition;
+	int quit=0;
 	printf("\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 	printf("You can use the following commands to play the game:\n\n");
 	printf("load <g>\n");
@@ -22,41 +23,57 @@ void game_PlayGame(){
 	printf("west (or w)\n");
 	printf("quit\n\n");
 
-	getInput("Press return to continue...", userLoadInput, USER_MAX_INPUT);
+	getInput("Press enter to continue...", userLoadInput, sizeof(userLoadInput));
 
-	/*char prompt[3];
-	prompt[1]="\nAt this stage of the program, only two commands are acceptable:"
-						 "\nload <g>"
-						 "\nquit ";
-	prompt[2]="\nAt this stage of the program, only two commands are acceptable:"
-						 "\ninit <x>,<y>"
-						 "\nquit ";
-	prompt[1]="\nAt this stage of the program, only three commands are acceptable:
-						 \n<direction>
-						 \nshoot <direction>
-						 \nquit ";
-*/
-while (TRUE) {
+	while (quit==0) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"load <g>\n"
 		"quit\n", userLoadInput, sizeof(userLoadInput));
 		char *firstChar = strtok(userLoadInput, "., ");
-		char *secondChar = strtok(NULL, "., ");
-		int boardChoice = atoi(secondChar);
-		if ( strncmp(firstChar, "load", sizeof(userLoadInput))!=0 &&
-					boardChoice!=1 || boardChoice!=2) {
+		if ( firstChar != NULL ){
+			if ( strncmp(firstChar, "quit", sizeof(userLoadInput)) == 0) {
+				quit = 1;
+				break;
+			}
+			else {
+				char *secondChar = strtok(NULL, "., ");
+				if ( secondChar != NULL ) {
+					int boardChoice = atoi(secondChar);
+					if ( strncmp(firstChar, "load", sizeof(userLoadInput))==0 &&
+								(boardChoice==1 || boardChoice==2)) {
+									OptionLoadBoard(currentBoard, boardChoice);
+									break;
+								}
+					else {
 						printInvalidInput();
 						continue;
 					}
-		OptionLoadBoard(currentBoard, boardChoice);
-		break;
+				}
+				else {
+					printInvalidInput();
+					continue;
+				}
+			}
+		}
+		else {
+			printInvalidInput();
+			continue;
+		}
+
+
+	}
+
+while (quit==0) {
+	getInput("At this stage of the program, only two commands are acceptable:\n"
+	"init <x>,<y>\n"
+	"quit\n", userLoadInput, sizeof(userLoadInput));
 }
-
-
+/*
+OptionInitializePlayer(currentBoard, playerPosition);
 
 board_Display(currentBoard);
 board_DisplayWarnings(currentBoard, playerPosition);
-
+*/
 	srand(0);
 }
 

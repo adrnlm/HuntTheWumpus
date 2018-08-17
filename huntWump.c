@@ -33,7 +33,7 @@ int main() {
         getInput(menuPromt, userMenuInput, USER_MENU_INPUT_PARAMETER);
         menuInput = atoi(userMenuInput);
         if(!(menuInput<4 && menuInput>0)) {
-          printf("    Invalid input.\n\n");
+          printInvalidInput();
           continue;
         }
         else
