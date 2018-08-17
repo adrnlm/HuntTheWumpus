@@ -7,7 +7,9 @@
 
 void game_PlayGame(){
 	Board currentBoard;
-	char userLoadInput[MAXIMUM_CHAR_PARAMETERS];
+	char enterButton[USER_MAX_INPUT];
+	char userLoadInput[MAXIMUM_LOAD_PARAMETERS];
+	char userInitInput[MAXIMUM_INIT_PARAMETERS];
 	Position playerPosition;
 	int quit=FALSE;
 	printf("\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
@@ -22,21 +24,21 @@ void game_PlayGame(){
 	printf("east (or e)\n");
 	printf("west (or w)\n");
 	printf("quit\n\n");
+	getInput("Press enter to continue...", enterButton, sizeof(enterButton));
 
-	getInput("Press enter to continue...", userLoadInput, sizeof(userLoadInput));
 	/*The load option*/
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"load <g>\n"
 		"quit\n", userLoadInput, sizeof(userLoadInput));
-		char *firstChar = strtok(userLoadInput, "., ");
+		char *firstChar = strtok(userLoadInput, " ");
 		if ( firstChar != NULL ){
 			if ( strncmp(firstChar, "quit", sizeof(userLoadInput)) == 0) {
 				quit = TRUE;
 				break;
 			}
 			else {
-				char *secondChar = strtok(NULL, "., ");
+				char *secondChar = strtok(NULL, " ");
 				if ( secondChar != NULL ) {
 					int boardChoice = atoi(secondChar);
 					if ( strncmp(firstChar, "load", sizeof(userLoadInput))==0 &&
@@ -61,53 +63,78 @@ void game_PlayGame(){
 		}
 	}
 
+	/*The initialize option*/
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"init <x>,<y>\n"
-		"quit\n", userLoadInput, sizeof(userLoadInput));
-	}
-/*
-OptionInitializePlayer(currentBoard, playerPosition);
+		"quit\n", userInitInput, sizeof(userInitInput));
 
-board_Display(currentBoard);
-board_DisplayWarnings(currentBoard, playerPosition);
-*/
+		char *firstChar = strtok(userInitInput, " ");
+		if ( firstChar != NULL ) {
+			if ( strncmp(firstChar, "quit", sizeof(userInitInput)) == 0) {
+				quit = TRUE;
+				break;
+			}
+			else {
+				char *secondChar = strtok(NULL, ",");
+				if ( secondChar != NULL ) {
+					char *thirdChar = strtok(NULL, ",");
+					if ( thirdChar != NULL ) {
+						int positionX = atoi(secondChar);
+						int positionY = atoi(thirdChar);
+						if ( strncmp(firstChar, "init", sizeof(userInitInput))==0 &&
+							 ((positionX<=4 && positionX>=1) &&
+						 	 (positionY<=4 && positionY>=1))) {
+								 printf("TRUE\n" );
+								 playerPosition.x=positionX;
+								 playerPosition.y=positionY;
+								 printf("%d\n", positionX);
+								 printf("%d\n", playerPosition.x);
+								 if ( OptionInitializePlayer(currentBoard, playerPosition)
+								 == TRUE )
+								 	break;
+								 else
+								 	continue;
+							}
+						else {
+							printInvalidInput();
+							continue;
+						}
+					}
+					else {
+						printInvalidInput();
+						continue;
+					}
+				}
+				else {
+					printInvalidInput();
+					continue;
+				}
+			}
+		}
+		else {
+			printInvalidInput();
+			continue;
+		}
+	}
+
+	board_Display(currentBoard);
+	board_DisplayWarnings(currentBoard, playerPosition);
+
 	srand(0);
 }
 
-void OptionInitializePlayer(Board currentBoard, Position *position){
-  int coordinatesVerifier=0;
-  Player newPlayer;
-  printf("\nInitialize player position\n" );
-  printf("- - - - - - - - - - - - - - - - -\n");
-  do {
-    printf("Enter coordinates X: " );
-    scanf("%d", &position->x);
-    if (position->x>=0 && position->x<=4) {
-      printf("Enter coordinates Y: " );
-      scanf("%d", &position->y);
-      if (position->y>=0 && position->y<=4) {
-        player_Initialise(&newPlayer, *position);
-				if ( board_PlacePlayer(currentBoard,*position)==TRUE) {
-					printf("Player Initialized\n");
-					printf(" init %d\n", position->x );
-					coordinatesVerifier=1;
-				}
-				else {
-					printf("Invalid space\n" );
-        	coordinatesVerifier=0;
-				}
-      }
-      else {
-        printf("Invalid coordinates. Enter number between 0-4\n\n" );
-        coordinatesVerifier=0;
-      }
-    }
-    else {
-      printf("Invalid coordinates. Enter number between 0-4\n\n" );
-      coordinatesVerifier=0;
-    }
-  } while(coordinatesVerifier==0);
+Boolean OptionInitializePlayer(Board currentBoard, Position position){
+	Player newPlayer;
+	player_Initialise(&newPlayer, position);
+	if ( board_PlacePlayer(currentBoard,position)==TRUE) {
+		printf("Player Initialized\n");
+		return TRUE;
+	}
+	else {
+		printf("Invalid Space\n\n" );
+		return FALSE;
+	}
 
   /*printf("SUCCESS\n");*/
 }
