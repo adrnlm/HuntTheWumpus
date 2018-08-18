@@ -32,7 +32,11 @@ void game_PlayGame(){
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"load <g>\n"
+<<<<<<< HEAD
 		"quit\n\n"
+=======
+		"quit\n"
+>>>>>>> 69122604856890a9db6192bfbbae9bf1e8e474eb
 		"Please enter your choice: ", userLoadInput, sizeof(userLoadInput));
 		char *firstChar = strtok(userLoadInput, " ");
 		if ( firstChar != NULL ){
@@ -70,7 +74,11 @@ void game_PlayGame(){
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"init <x>,<y>\n"
+<<<<<<< HEAD
 		"quit\n\n"
+=======
+		"quit\n"
+>>>>>>> 69122604856890a9db6192bfbbae9bf1e8e474eb
 		"Please enter your choice: ", userInitInput, sizeof(userInitInput));
 
 		char *firstChar = strtok(userInitInput, " ");
@@ -121,10 +129,15 @@ void game_PlayGame(){
 	}
 
 	/*Play options*/
+<<<<<<< HEAD
 	while (quit==FALSE) {
 		board_Display(currentBoard);
 		board_DisplayWarnings(currentBoard, playerPosition);
 		getInput("\n\nAt this stage of the program, only three commands are acceptable:\n"
+=======
+	while (quit==False) {
+		getInput("At this stage of the program, only three commands are acceptable:\n"
+>>>>>>> 69122604856890a9db6192bfbbae9bf1e8e474eb
 		"<directions>\n"
 		"shoot <directions>\n"
 		"quit\n"
@@ -133,6 +146,7 @@ void game_PlayGame(){
 
 		char *firstChar = strtok(userPlayInput, " ");
 		if ( firstChar != NULL ) {
+<<<<<<< HEAD
 			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userPlayInput)) == 0) {
 				quit = TRUE;
 				break;
@@ -176,6 +190,20 @@ void game_PlayGame(){
 						printInvalidInput();
 						continue;
 					}
+=======
+			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userInitInput)) == 0) {
+				quit = TRUE;
+				break;
+			}
+			else if {
+				/*MOVEMENT FUNCTION*/
+				
+			}
+			else {
+				char *secondChar = strtok(NULL, " ");
+				if ( secondChar != NULL ) {
+					/*SHOOT FUNCTION*/
+>>>>>>> 69122604856890a9db6192bfbbae9bf1e8e474eb
 				}
 				else {
 					printInvalidInput();
@@ -188,6 +216,24 @@ void game_PlayGame(){
 			continue;
 		}
 	}
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+	board_Display(currentBoard);
+	board_DisplayWarnings(currentBoard, playerPosition);
+
+>>>>>>> 69122604856890a9db6192bfbbae9bf1e8e474eb
 	srand(0);
 }
 
