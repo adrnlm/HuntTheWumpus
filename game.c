@@ -28,11 +28,12 @@ void game_PlayGame(){
 	printf("quit\n\n");
 	getInput("Press enter to continue...", enterButton, sizeof(enterButton));
 
-	/*The load option*/
+	/*Load option*/
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"load <g>\n"
-		"quit\n", userLoadInput, sizeof(userLoadInput));
+		"quit\n"
+		"Please enter your choice: ", userLoadInput, sizeof(userLoadInput));
 		char *firstChar = strtok(userLoadInput, " ");
 		if ( firstChar != NULL ){
 			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userLoadInput)) == 0) {
@@ -65,11 +66,12 @@ void game_PlayGame(){
 		}
 	}
 
-	/*The initialize option*/
+	/*Initialize option*/
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"init <x>,<y>\n"
-		"quit\n", userInitInput, sizeof(userInitInput));
+		"quit\n"
+		"Please enter your choice: ", userInitInput, sizeof(userInitInput));
 
 		char *firstChar = strtok(userInitInput, " ");
 		if ( firstChar != NULL ) {
@@ -105,6 +107,42 @@ void game_PlayGame(){
 						printInvalidInput();
 						continue;
 					}
+				}
+				else {
+					printInvalidInput();
+					continue;
+				}
+			}
+		}
+		else {
+			printInvalidInput();
+			continue;
+		}
+	}
+
+	/*Play options*/
+	while (quit==False) {
+		getInput("At this stage of the program, only three commands are acceptable:\n"
+		"<directions>\n"
+		"shoot <directions>\n"
+		"quit\n"
+		"Where <direction> is one of: north,n,south,s,east,e,west,w\n\n"
+		"Please enter your choice: ", userPlayInput, sizeof(userPlayInput));
+
+		char *firstChar = strtok(userPlayInput, " ");
+		if ( firstChar != NULL ) {
+			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userInitInput)) == 0) {
+				quit = TRUE;
+				break;
+			}
+			else if {
+				/*MOVEMENT FUNCTION*/
+				
+			}
+			else {
+				char *secondChar = strtok(NULL, " ");
+				if ( secondChar != NULL ) {
+					/*SHOOT FUNCTION*/
 				}
 				else {
 					printInvalidInput();
