@@ -19,18 +19,20 @@ void game_PlayGame(){
 
 	/*LOAD OPTION*/
 	while (quit==FALSE) {
+		char *firstChar;
+		char *secondChar;
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"load <g>\n"
 		"quit\n\n"
 		"Please enter your choice: ", userLoadInput, sizeof(userLoadInput));
-		char *firstChar = strtok(userLoadInput, " ");
+		 firstChar = strtok(userLoadInput, " ");
 		if ( firstChar != NULL ){
 			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userLoadInput)) == 0) {
 				quit = TRUE;
 				break;
 			}
 			else {
-				char *secondChar = strtok(NULL, " ");
+				secondChar = strtok(NULL, " ");
 				if ( secondChar != NULL ) {
 					int boardChoice = atoi(secondChar);
 					if ( strncmp(firstChar, COMMAND_LOAD, sizeof(userLoadInput))==0 &&
@@ -57,19 +59,21 @@ void game_PlayGame(){
 
 	/*INIT OPTION*/
 	while (quit==FALSE) {
+		char *firstChar;
+		char *secondChar;
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"init <x>,<y>\n"
 		"quit\n\n"
 		"Please enter your choice: ", userInitInput, sizeof(userInitInput));
 
-		char *firstChar = strtok(userInitInput, " ");
+		 firstChar = strtok(userInitInput, " ");
 		if ( firstChar != NULL ) {
 			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userInitInput)) == 0) {
 				quit = TRUE;
 				break;
 			}
 			else {
-				char *secondChar = strtok(NULL, ",");
+				secondChar = strtok(NULL, ",");
 				if ( secondChar != NULL ) {
 					char *thirdChar = strtok(NULL, ",");
 					if ( thirdChar != NULL ) {
@@ -111,6 +115,7 @@ void game_PlayGame(){
 
 	/*PLAY OPTIONS*/
 	while (quit==FALSE) {
+		char *firstChar;
 		board_Display(currentBoard);
 		board_DisplayWarnings(currentBoard, playerPosition);
 		getInput("\n\nAt this stage of the program, only three commands are acceptable:\n"
@@ -120,7 +125,7 @@ void game_PlayGame(){
 		"Where <direction> is one of: north,n,south,s,east,e,west,w\n\n"
 		"Please enter your choice: ", userPlayInput, sizeof(userPlayInput));
 
-		char *firstChar = strtok(userPlayInput, " ");
+		firstChar = strtok(userPlayInput, " ");
 		if ( firstChar != NULL ) {
 			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userPlayInput)) == 0) {
 				quit = TRUE;

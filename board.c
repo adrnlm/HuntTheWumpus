@@ -78,15 +78,15 @@ void board_Display(Board board) {
 }
 
 void board_DisplayWarnings(Board board, Position position){
-  int scanX = position.x-1;
-  int scanY = position.y-1;
+  int loopX;
+  int loopY;
   int maxScanX = position.x+1;
   int maxScanY = position.y+1;
   char *warning[]=
   {"You hear flapping!", "You feel a breeze!", "You smell a wumpus!"};
 
-  for ( int loopX = scanX; loopX>=0 && (loopX<=maxScanX && loopX<BOARD_WIDTH)  ; loopX++ ){
-    for ( int loopY = scanY; loopY>=0 && (loopY<=maxScanY && loopY<BOARD_HEIGHT) ; loopY++ ) {
+  for ( loopX = position.x-1; loopX>=0 && (loopX<=maxScanX && loopX<BOARD_WIDTH)  ; loopX++ ){
+    for ( loopY = position.y-1; loopY>=0 && (loopY<=maxScanY && loopY<BOARD_HEIGHT) ; loopY++ ) {
       int warningType = 2;
         do {
           if ( board[loopY][loopX] == warningType){
