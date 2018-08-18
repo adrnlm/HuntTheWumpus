@@ -137,14 +137,45 @@ void game_PlayGame(){
 				quit = TRUE;
 				break;
 			}
-			else if (/*CONDITIONS*/) {
+			if ( strncmp(firstChar, COMMAND_NORTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_NORTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+				printf("MOVE %s\n", firstChar);
 				/*MOVEMENT FUNCTION*/
-
+			}
+			else if ( strncmp(firstChar, COMMAND_SOUTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_SOUTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+				printf("MOVE %s\n", firstChar);
+				/*MOVEMENT FUNCTION*/
+			}
+			else if ( strncmp(firstChar, COMMAND_EAST, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_EAST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+				printf("MOVE %s\n", firstChar);
+				/*MOVEMENT FUNCTION*/
+			}
+			else if ( strncmp(firstChar, COMMAND_WEST, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_WEST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+				printf("MOVE %s\n", firstChar);
+				/*MOVEMENT FUNCTION*/
 			}
 			else {
 				char *secondChar = strtok(NULL, " ");
-				if ( secondChar != NULL ) {
-					/*SHOOT FUNCTION*/
+				if ( strncmp(firstChar, COMMAND_SHOOT, sizeof(userPlayInput)) == 0 && secondChar != NULL ) {
+					if ( strncmp(secondChar, COMMAND_NORTH, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_NORTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+						printf("SHOOT %s\n", secondChar);
+						/*SHOOT FUNCTION*/
+					}
+					else if ( strncmp(secondChar, COMMAND_SOUTH, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_SOUTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+						printf("SHOOT %s\n", secondChar);
+						/*SHOOT FUNCTION*/
+					}
+					else if ( strncmp(secondChar, COMMAND_EAST, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_EAST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+						printf("SHOOT %s\n", secondChar);
+						/*SHOOT FUNCTION*/
+					}
+					else if ( strncmp(secondChar, COMMAND_WEST, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_WEST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+						printf("SHOOT %s\n", secondChar);
+						/*SHOOT FUNCTION*/
+					}
+					else {
+						printInvalidInput();
+						continue;
+					}
 				}
 				else {
 					printInvalidInput();
