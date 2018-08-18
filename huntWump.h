@@ -22,7 +22,7 @@
  * them when printing.
  */
 void showStudentInformation();
-
+void displayWumpusMenu();
 void playGame();
 
 #endif

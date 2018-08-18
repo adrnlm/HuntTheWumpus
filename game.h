@@ -47,8 +47,8 @@
 void game_PlayGame();
 
 Boolean OptionInitializePlayer();
-void OptionLoadBoard(Board board, int userLoadChoice);
+void OptionLoadBoard();
+void displayGameMenu();
 
-/* TODO not provided */
 
 #endif

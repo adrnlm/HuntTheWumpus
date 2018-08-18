@@ -14,21 +14,10 @@ void game_PlayGame(){
 	Player newPlayer;
 	Position playerPosition;
 	int quit=FALSE;
-	printf("\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
-	printf("You can use the following commands to play the game:\n\n");
-	printf("load <g>\n");
-	printf(" g:number of the game board to load (either 1 or 2)\n");
-	printf("init <x>,<y>\n");
-	printf(" x:horizontal position of the player on the board (between 0 & 4)\n");
-	printf(" y:vertical position of the player on the board (between 0 & 4)\n");
-	printf("north (or n)\n");
-	printf("south (or s)\n");
-	printf("east (or e)\n");
-	printf("west (or w)\n");
-	printf("quit\n\n");
+	displayGameMenu();
 	getInput("Press enter to continue...", enterButton, sizeof(enterButton));
 
-	/*Load option*/
+	/*LOAD OPTION*/
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"load <g>\n"
@@ -66,7 +55,7 @@ void game_PlayGame(){
 		}
 	}
 
-	/*Initialize option*/
+	/*INIT OPTION*/
 	while (quit==FALSE) {
 		getInput("At this stage of the program, only two commands are acceptable:\n"
 		"init <x>,<y>\n"
@@ -120,7 +109,7 @@ void game_PlayGame(){
 		}
 	}
 
-	/*Play options*/
+	/*PLAY OPTIONS*/
 	while (quit==FALSE) {
 		board_Display(currentBoard);
 		board_DisplayWarnings(currentBoard, playerPosition);
@@ -139,38 +128,38 @@ void game_PlayGame(){
 			}
 			if ( strncmp(firstChar, COMMAND_NORTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_NORTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVEMENT FUNCTION*/
+				/*MOVE NORTH FUNCTION*/
 			}
 			else if ( strncmp(firstChar, COMMAND_SOUTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_SOUTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVEMENT FUNCTION*/
+				/*MOVE SOUTH FUNCTION*/
 			}
 			else if ( strncmp(firstChar, COMMAND_EAST, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_EAST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVEMENT FUNCTION*/
+				/*MOVE EAST FUNCTION*/
 			}
 			else if ( strncmp(firstChar, COMMAND_WEST, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_WEST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVEMENT FUNCTION*/
+				/*MOVE WEST FUNCTION*/
 			}
 			else {
 				char *secondChar = strtok(NULL, " ");
 				if ( strncmp(firstChar, COMMAND_SHOOT, sizeof(userPlayInput)) == 0 && secondChar != NULL ) {
 					if ( strncmp(secondChar, COMMAND_NORTH, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_NORTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT FUNCTION*/
+						/*SHOOT NORTH FUNCTION*/
 					}
 					else if ( strncmp(secondChar, COMMAND_SOUTH, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_SOUTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT FUNCTION*/
+						/*SHOOT SOUTH FUNCTION*/
 					}
 					else if ( strncmp(secondChar, COMMAND_EAST, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_EAST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT FUNCTION*/
+						/*SHOOT EAST FUNCTION*/
 					}
 					else if ( strncmp(secondChar, COMMAND_WEST, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_WEST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT FUNCTION*/
+						/*SHOOT WEST FUNCTION*/
 					}
 					else {
 						printInvalidInput();
@@ -216,4 +205,19 @@ void OptionLoadBoard(Board board, int userLoadChoice) {
       printf("Board 2 successfully loaded\n\n");
     }
 
+}
+
+void displayGameMenu() {
+	printf("\n\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
+	printf("You can use the following commands to play the game:\n\n");
+	printf("load <g>\n");
+	printf(" g:number of the game board to load (either 1 or 2)\n");
+	printf("init <x>,<y>\n");
+	printf(" x:horizontal position of the player on the board (between 0 & 4)\n");
+	printf(" y:vertical position of the player on the board (between 0 & 4)\n");
+	printf("north (or n)\n");
+	printf("south (or s)\n");
+	printf("east (or e)\n");
+	printf("west (or w)\n");
+	printf("quit\n\n");
 }

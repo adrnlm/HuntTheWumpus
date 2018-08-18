@@ -16,18 +16,8 @@
 int main() {
   char userMenuInput[USER_MAX_INPUT];
   int menuInput=0;
-   /**
-    * Here's the main function. You can write the "main menu" loop/code
-    * here or you can make separate functions - up to you.
-    */
     do{
-      printf("\n\n- - - - - - - - - - - - - -\n");
-      printf("Welcome to Hunt the Wumpus\n");
-      printf("- - - - - - - - - - - - - -\n\n");
-      printf("1. Play Game\n");
-      printf("2. Show Student Information\n");
-      printf("3. Quit\n\n");
-
+      displayWumpusMenu();
       while (TRUE) {
         char * menuPromt ="Please Enter your choice: ";
         getInput(menuPromt, userMenuInput, USER_MENU_INPUT_PARAMETER);
@@ -59,6 +49,15 @@ int main() {
 
 
    return EXIT_SUCCESS;
+}
+
+void displayWumpusMenu() {
+  printf("\n\n- - - - - - - - - - - - - -\n");
+  printf("Welcome to Hunt the Wumpus\n");
+  printf("- - - - - - - - - - - - - -\n\n");
+  printf("1. Play Game\n");
+  printf("2. Show Student Information\n");
+  printf("3. Quit\n\n");
 }
 
 void showStudentInformation() {
