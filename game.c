@@ -35,7 +35,7 @@ void game_PlayGame(){
 		"quit\n", userLoadInput, sizeof(userLoadInput));
 		char *firstChar = strtok(userLoadInput, " ");
 		if ( firstChar != NULL ){
-			if ( strncmp(firstChar, "quit", sizeof(userLoadInput)) == 0) {
+			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userLoadInput)) == 0) {
 				quit = TRUE;
 				break;
 			}
@@ -43,7 +43,7 @@ void game_PlayGame(){
 				char *secondChar = strtok(NULL, " ");
 				if ( secondChar != NULL ) {
 					int boardChoice = atoi(secondChar);
-					if ( strncmp(firstChar, "load", sizeof(userLoadInput))==0 &&
+					if ( strncmp(firstChar, COMMAND_LOAD, sizeof(userLoadInput))==0 &&
 								(boardChoice==1 || boardChoice==2)) {
 									OptionLoadBoard(currentBoard, boardChoice);
 									break;
@@ -73,7 +73,7 @@ void game_PlayGame(){
 
 		char *firstChar = strtok(userInitInput, " ");
 		if ( firstChar != NULL ) {
-			if ( strncmp(firstChar, "quit", sizeof(userInitInput)) == 0) {
+			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userInitInput)) == 0) {
 				quit = TRUE;
 				break;
 			}
@@ -84,14 +84,11 @@ void game_PlayGame(){
 					if ( thirdChar != NULL ) {
 						int positionX = atoi(secondChar);
 						int positionY = atoi(thirdChar);
-						if ( strncmp(firstChar, "init", sizeof(userInitInput))==0 &&
+						if ( strncmp(firstChar, COMMAND_INIT, sizeof(userInitInput))==0 &&
 							 ((positionX<=4 && positionX>=1) &&
 						 	 (positionY<=4 && positionY>=1))) {
-								 printf("TRUE\n" );
 								 playerPosition.x=positionX;
 								 playerPosition.y=positionY;
-								 printf("%d\n", positionX);
-								 printf("%d\n", playerPosition.x);
 								 if ( OptionInitializePlayer(currentBoard, newPlayer,
 									  playerPosition)
 								 == TRUE )
@@ -120,6 +117,17 @@ void game_PlayGame(){
 			continue;
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 	board_Display(currentBoard);
 	board_DisplayWarnings(currentBoard, playerPosition);

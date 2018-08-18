@@ -24,7 +24,6 @@ Board BOARD_2 =
 };
 
 void board_Load(Board board, Board boardToLoad) {
-  /* TODO */
   int height, width;
   for (width=0; width < BOARD_WIDTH; width++){
     for (height=0; height < BOARD_HEIGHT; height++) {
@@ -34,7 +33,6 @@ void board_Load(Board board, Board boardToLoad) {
 }
 
 Boolean board_PlacePlayer(Board board, Position position) {
-   /* TODO */
    if (board[position.y][position.x]==board_EMPTY) {
      board[position.y][position.x]=board_PLAYER;
      return TRUE;
@@ -58,7 +56,7 @@ ArrowHit board_FireArrow(Board board, Position position) {
 void board_Display(Board board) {
    /* TODO */
    int row, column;
-   printf("     0    1    2    3    4  \n");
+   printf("\n     0    1    2    3    4  \n");
    for (row = 0; row < BOARD_WIDTH; row++) {
       printf("  --------------------------\n");
       printf("%d", row);

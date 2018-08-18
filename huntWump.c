@@ -6,12 +6,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "huntWump.h"
-
+/*= = = R E M O V E = = = = */
 #include "board.c"
 #include "game.c"
 #include "helpers.c"
 #include "player.c"
-
+/*= = = = = = = = = = = = = */
 
 int main() {
   char userMenuInput[USER_MAX_INPUT];
