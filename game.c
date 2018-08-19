@@ -12,7 +12,8 @@ void game_PlayGame(){
 	char userInitInput[MAXIMUM_INIT_PARAMETERS];
 	char userPlayInput[MAXIMUM_PLAY_PARAMETERS];
 	Player newPlayer;
-	Position playerPosition;
+	Position playerCurrentPosition;
+	Position playerNextPosition;
 	int quit=FALSE;
 	displayGameMenu();
 	getInput("Press enter to continue...", enterButton, sizeof(enterButton));
@@ -82,10 +83,10 @@ void game_PlayGame(){
 						if ( strncmp(firstChar, COMMAND_INIT, sizeof(userInitInput))==0 &&
 							 ((positionX<=4 && positionX>=1) &&
 						 	 (positionY<=4 && positionY>=1))) {
-								 playerPosition.x=positionX;
-								 playerPosition.y=positionY;
-								 if ( board_PlacePlayer(currentBoard,playerPosition)==TRUE) {
-							 		player_Initialise(&newPlayer, playerPosition);
+								 playerCurrentPosition.x=positionX;
+								 playerCurrentPosition.y=positionY;
+								 if ( board_PlacePlayer(currentBoard,playerCurrentPosition)==TRUE) {
+							 		player_Initialise(&newPlayer, playerCurrentPosition);
 							 		printf("Player Initialized\n");
 							 		break;
 							 	}
@@ -120,7 +121,7 @@ void game_PlayGame(){
 	while (quit==FALSE) {
 		char *firstChar;
 		board_Display(currentBoard);
-		board_DisplayWarnings(currentBoard, playerPosition);
+		board_DisplayWarnings(currentBoard, playerCurrentPosition);
 		getInput("\n\nAt this stage of the program, only three commands are acceptable:\n"
 		"<directions>\n"
 		"shoot <directions>\n"
@@ -137,6 +138,16 @@ void game_PlayGame(){
 			if ( strncmp(firstChar, COMMAND_NORTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_NORTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 				printf("MOVE %s\n", firstChar);
 				/*MOVE NORTH FUNCTION*/
+				if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_NORTH) ) == board_PLAYER_MOVED ) {
+					playerCurrentPosition=playerNextPosition;
+					player_UpdatePosition(&newPlayer, playerCurrentPosition);
+					printf("MOVED %s\n", firstChar);
+					continue;
+				}
+				else
+				 printf("DID NOT MOVE %s\n", firstChar);
+				 continue;
+
 			}
 			else if ( strncmp(firstChar, COMMAND_SOUTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_SOUTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
 				printf("MOVE %s\n", firstChar);

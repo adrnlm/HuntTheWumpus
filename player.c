@@ -13,10 +13,25 @@ void player_Initialise(Player * player, Position position){
 
 
 Position player_GetNextPosition(Position position, Direction direction){
-   /* TODO */
+   switch (direction) {
+     case 0:
+      position.y--;
+      break;
+     case 1:
+      position.x--;
+      break;
+     case 2:
+      position.y++;
+      break;
+     case 3:
+      position.x++;
+      break;
+
+   }
    return position;
 }
 
 void player_UpdatePosition(Player * player, Position position) {
    /* TODO */
+   player->position=position;
 }

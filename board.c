@@ -44,8 +44,22 @@ Boolean board_PlacePlayer(Board board, Position position) {
 
 PlayerMove board_MovePlayer(Board board, Position playerPosition,
 			    Position nextPosition) {
-   /* TODO */
-   return board_PLAYER_MOVED;
+   if ( board[nextPosition.y][nextPosition.x] == board_EMPTY ||
+   board[nextPosition.y][nextPosition.x] == board_TRAVERSED ) {
+     board[nextPosition.y][nextPosition.x] = board_PLAYER;
+     board[playerPosition.y][playerPosition.x] = board_TRAVERSED;
+     return board_PLAYER_MOVED;
+   }
+   else if ( board[nextPosition.y][nextPosition.x] == board_PIT ||
+   board[nextPosition.y][nextPosition.x] == board_WUMPUS ) {
+     return board_PLAYER_KILLED;
+   }
+   else if ( board[nextPosition.y][nextPosition.x] == board_BATS) {
+     return board_BAT_CELL;
+   }
+   else if ( board[nextPosition.y][nextPosition.x]>=BOARD_HEIGHT || board[nextPosition.y][nextPosition.x]>=BOARD_WIDTH) {
+     return board_OUTSIDE_BOUNDS;
+   }
 }
 
 ArrowHit board_FireArrow(Board board, Position position) {
@@ -69,6 +83,8 @@ void board_Display(Board board) {
               printf(" | %s", WUMPUS_OUTPUT);
           else if (board[row][column]==board_PLAYER)
             printf(" | %s", PLAYER_OUTPUT);
+          else if (board[row][column]==board_TRAVERSED)
+            printf(" | %s", TRAVERSED_OUTPUT);  
           else
             printf(" | %s", EMPTY_OUTPUT);
         }
