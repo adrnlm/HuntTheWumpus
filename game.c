@@ -84,12 +84,15 @@ void game_PlayGame(){
 						 	 (positionY<=4 && positionY>=1))) {
 								 playerPosition.x=positionX;
 								 playerPosition.y=positionY;
-								 if ( OptionInitializePlayer(currentBoard, newPlayer,
-									  playerPosition)
-								 == TRUE )
-								 	break;
-								 else
-								 	continue;
+								 if ( board_PlacePlayer(currentBoard,playerPosition)==TRUE) {
+							 		player_Initialise(&newPlayer, playerPosition);
+							 		printf("Player Initialized\n");
+							 		break;
+							 	}
+							 	else {
+							 		printf("Invalid Space\n\n" );
+							 		continue;
+							 	}
 							}
 						else {
 							printInvalidInput();
@@ -183,21 +186,6 @@ void game_PlayGame(){
 		}
 	}
 	srand(0);
-}
-
-Boolean OptionInitializePlayer(Board currentBoard, Player newPlayer,
-	Position position){
-	player_Initialise(&newPlayer, position);
-	if ( board_PlacePlayer(currentBoard,position)==TRUE) {
-		printf("Player Initialized\n");
-		return TRUE;
-	}
-	else {
-		printf("Invalid Space\n\n" );
-		return FALSE;
-	}
-
-  /*printf("SUCCESS\n");*/
 }
 
 void OptionLoadBoard(Board board, int userLoadChoice) {

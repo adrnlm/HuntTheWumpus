@@ -46,7 +46,6 @@
  */
 void game_PlayGame();
 
-Boolean OptionInitializePlayer();
 void OptionLoadBoard();
 void displayGameMenu();
 
