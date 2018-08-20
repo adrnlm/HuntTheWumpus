@@ -144,14 +144,6 @@ void game_PlayGame(){
 					printf("MOVED %s\n", firstChar);
 					continue;
 				}
-				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition ) == board_OUTSIDE_BOUNDS ) {
-					printf("Unable to move - outside bounds.\n");
-					continue;
-				}
-				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition ) == board_PLAYER_KILLED ) {
-					printf("Player killed!\n");
-					break;
-				}
 				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition ) == board_BAT_CELL ) {
 					/*Random Placement*/
 					printf("Bat Cell!\n");
@@ -168,9 +160,13 @@ void game_PlayGame(){
 					player_UpdatePosition(&newPlayer,playerCurrentPosition);
 					continue;
 				}
-				else {
-					printf("ERROR - DID NOT MOVE %s\n", firstChar);
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition ) == board_OUTSIDE_BOUNDS ) {
+					printf("Unable to move - outside bounds.\n");
 					continue;
+				}
+				else  {
+					printf("Player killed!\n");
+					break;
 				}
 			}
 			else {
@@ -237,6 +233,7 @@ Boolean getDirection(char *userDirectionInput, Direction *tmpDirection) {
 	else
 		return FALSE;
 }
+
 
 void OptionLoadBoard(Board board, int userLoadChoice) {
     if ( userLoadChoice == 1 ){
