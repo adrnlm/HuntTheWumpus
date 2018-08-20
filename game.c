@@ -209,7 +209,6 @@ void OptionLoadBoard(Board board, int userLoadChoice) {
     if ( userLoadChoice == 1 ){
       board_Load(board, BOARD_1);
       printf("Board 1 successfully loaded\n\n");
-
     }
     else {
       board_Load(board, BOARD_2);

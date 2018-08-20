@@ -54,8 +54,7 @@ PlayerMove board_MovePlayer(Board board, Position playerPosition,
    else if ( nextPosition.y>BOARD_HEIGHT || nextPosition.x>BOARD_WIDTH || nextPosition.x<0 || nextPosition.y<0) {
      return board_OUTSIDE_BOUNDS;
    }
-   else /*( board[nextPosition.y][nextPosition.x] == board_EMPTY ||
-   board[nextPosition.y][nextPosition.x] == board_TRAVERSED )*/ {
+   else {
      board[nextPosition.y][nextPosition.x] = board_PLAYER;
      board[playerPosition.y][playerPosition.x] = board_TRAVERSED;
      return board_PLAYER_MOVED;
