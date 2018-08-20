@@ -70,10 +70,10 @@ ArrowHit board_FireArrow(Board board, Position position) {
 void board_Display(Board board) {
    /* TODO */
    int row, column;
-   printf("\n   0  1  2  3  4  \n");
+   printf("\n    0  1  2  3  4  \n");
    for (row = 0; row < BOARD_WIDTH; row++) {
-      printf(" ----------------\n");
-      printf("%d", row);
+      printf("  ----------------\n");
+      printf("%d ", row);
         for (column = 0; column < BOARD_HEIGHT; column++) {
           if (board[row][column]==board_PIT)
             printf("|%s", PIT_OUTPUT);
