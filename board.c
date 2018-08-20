@@ -105,8 +105,6 @@ void board_DisplayWarnings(Board board, Position position){
       int warningType = 2;
         do {
           if ( board[loopY][loopX] == warningType){
-            /*TESTING
-            printf("\nboard[%d][%d]", loopX, loopY );*/
             printf("%s ", warning[warningType-2]);
         }
         warningType++;
