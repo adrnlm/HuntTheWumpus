@@ -46,6 +46,7 @@
  */
 void game_PlayGame();
 
+Boolean getDirection();
 void OptionLoadBoard();
 void displayGameMenu();
 
