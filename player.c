@@ -17,13 +17,13 @@ Position player_GetNextPosition(Position position, Direction direction){
       position.y--;
       break;
      case 1:
-      position.x--;
+      position.x++;
       break;
      case 2:
       position.y++;
       break;
      case 3:
-      position.x++;
+      position.x--;
       break;
 
    }
@@ -31,6 +31,5 @@ Position player_GetNextPosition(Position position, Direction direction){
 }
 
 void player_UpdatePosition(Player * player, Position position) {
-   /* TODO */
    player->position=position;
 }
