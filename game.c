@@ -12,8 +12,9 @@ void game_PlayGame(){
 	char userInitInput[MAXIMUM_INIT_PARAMETERS];
 	char userPlayInput[MAXIMUM_PLAY_PARAMETERS];
 	Player newPlayer;
-	Position playerCurrentPosition;
-	Position playerNextPosition;
+
+	Position playerCurrentPosition, playerNextPosition;
+
 	int quit=FALSE;
 	displayGameMenu();
 	getInput("Press enter to continue...", enterButton, sizeof(enterButton));
@@ -135,50 +136,132 @@ void game_PlayGame(){
 				quit = TRUE;
 				break;
 			}
+			/*MOVE NORTH FUNCTION*/
 			if ( strcmp(firstChar, COMMAND_NORTH) == 0 || strcmp(firstChar, COMMAND_NORTH_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVE NORTH FUNCTION*/
 				if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_NORTH) ) == board_PLAYER_MOVED ) {
-					playerCurrentPosition=playerNextPosition;
+					playerCurrentPosition = playerNextPosition;
 					player_UpdatePosition(&newPlayer, playerCurrentPosition);
 					printf("MOVED %s\n", firstChar);
 					continue;
 				}
-				else
-				 printf("DID NOT MOVE %s\n", firstChar);
-				 continue;
-
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_NORTH) ) == board_OUTSIDE_BOUNDS ) {
+					printf("Unable to move - outside bounds.\n");
+					continue;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_NORTH) ) == board_PLAYER_KILLED ) {
+					printf("Player killed!\n");
+					break;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_NORTH) ) == board_BAT_CELL ) {
+					/*Random Placement*/
+					printf("Bat Cell!\n");
+					continue;
+				}
+				else {
+					printf("ERROR - DID NOT MOVE %s\n", firstChar);
+					continue;
+				}
 			}
+			/*MOVE SOUTH FUNCTION*/
 			else if ( strcmp(firstChar, COMMAND_SOUTH) == 0 || strcmp(firstChar, COMMAND_SOUTH_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVE SOUTH FUNCTION*/
+				if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_SOUTH) ) == board_PLAYER_MOVED ) {
+					playerCurrentPosition = playerNextPosition;
+					player_UpdatePosition(&newPlayer, playerCurrentPosition);
+					printf("MOVED %s\n", firstChar);
+					continue;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_SOUTH) ) == board_OUTSIDE_BOUNDS ) {
+					printf("Unable to move - outside bounds.\n");
+					continue;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_SOUTH) ) == board_PLAYER_KILLED ) {
+					printf("Player killed!\n");
+					break;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_SOUTH) ) == board_BAT_CELL ) {
+					/*Random Placement*/
+					printf("Bat Cell!\n");
+					continue;
+				}
+				else {
+					printf("ERROR - DID NOT MOVE %s\n", firstChar);
+					continue;
+				}
 			}
+			/*MOVE EAST FUNCTION*/
 			else if ( strcmp(firstChar, COMMAND_EAST) == 0 || strcmp(firstChar, COMMAND_EAST_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVE EAST FUNCTION*/
+				if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_EAST) ) == board_PLAYER_MOVED ) {
+					playerCurrentPosition = playerNextPosition;
+					player_UpdatePosition(&newPlayer, playerCurrentPosition);
+					printf("MOVED %s\n", firstChar);
+					continue;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_EAST) ) == board_OUTSIDE_BOUNDS ) {
+					printf("Unable to move - outside bounds.\n");
+					continue;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_EAST) ) == board_PLAYER_KILLED ) {
+					printf("Player killed!\n");
+					break;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_EAST) ) == board_BAT_CELL ) {
+					/*Random Placement*/
+					printf("Bat Cell!\n");
+					continue;
+				}
+				else {
+					printf("ERROR - DID NOT MOVE %s\n", firstChar);
+					continue;
+				}
 			}
+			/*MOVE WEST FUNCTION*/
 			else if ( strcmp(firstChar, COMMAND_WEST) == 0 || strcmp(firstChar, COMMAND_WEST_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
-				/*MOVE WEST FUNCTION*/
+				if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_WEST) ) == board_PLAYER_MOVED ) {
+					playerCurrentPosition = playerNextPosition;
+					player_UpdatePosition(&newPlayer, playerCurrentPosition);
+					printf("MOVED %s\n", firstChar);
+					continue;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_WEST) ) == board_OUTSIDE_BOUNDS ) {
+					printf("Unable to move - outside bounds.\n");
+					continue;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_WEST) ) == board_PLAYER_KILLED ) {
+					printf("Player killed!\n");
+					break;
+				}
+				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_WEST) ) == board_BAT_CELL ) {
+					/*Random Placement*/
+					printf("Bat Cell!\n");
+					continue;
+				}
+				else {
+					printf("ERROR - DID NOT MOVE %s\n", firstChar);
+					continue;
+				}
 			}
 			else {
 				char *secondChar = strtok(NULL, " ");
 				if ( strcmp(firstChar, COMMAND_SHOOT) == 0 && secondChar != NULL ) {
+					/*SHOOT NORTH FUNCTION*/
 					if ( strcmp(secondChar, COMMAND_NORTH) == 0 || strcmp(secondChar, COMMAND_NORTH_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT NORTH FUNCTION*/
 					}
+					/*SHOOT SOUTH FUNCTION*/
 					else if ( strcmp(secondChar, COMMAND_SOUTH) == 0 || strcmp(secondChar, COMMAND_SOUTH_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT SOUTH FUNCTION*/
 					}
+					/*SHOOT EAST FUNCTION*/
 					else if ( strcmp(secondChar, COMMAND_EAST) == 0 || strcmp(secondChar, COMMAND_EAST_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT EAST FUNCTION*/
 					}
+					/*SHOOT WEST FUNCTION*/
 					else if ( strcmp(secondChar, COMMAND_WEST) == 0 || strcmp(secondChar, COMMAND_WEST_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
-						/*SHOOT WEST FUNCTION*/
 					}
 					else {
 						printInvalidInput();

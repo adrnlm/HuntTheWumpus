@@ -6,8 +6,7 @@
 #include "player.h"
 
 void player_Initialise(Player * player, Position position){
-   player->position.x = position.x;
-   player->position.y = position.y;
+   player->position = position;
    player->numArrows = INIT_ARROW_COUNT;
 }
 

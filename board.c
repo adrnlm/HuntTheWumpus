@@ -33,8 +33,8 @@ void board_Load(Board board, Board boardToLoad) {
 }
 
 Boolean board_PlacePlayer(Board board, Position position) {
-   if (board[position.y][position.x]==board_EMPTY) {
-     board[position.y][position.x]=board_PLAYER;
+   if (board[position.y][position.x] == board_EMPTY) {
+     board[position.y][position.x] = board_PLAYER;
      return TRUE;
    }
   else
@@ -44,13 +44,7 @@ Boolean board_PlacePlayer(Board board, Position position) {
 
 PlayerMove board_MovePlayer(Board board, Position playerPosition,
 			    Position nextPosition) {
-   if ( board[nextPosition.y][nextPosition.x] == board_EMPTY ||
-   board[nextPosition.y][nextPosition.x] == board_TRAVERSED ) {
-     board[nextPosition.y][nextPosition.x] = board_PLAYER;
-     board[playerPosition.y][playerPosition.x] = board_TRAVERSED;
-     return board_PLAYER_MOVED;
-   }
-   else if ( board[nextPosition.y][nextPosition.x] == board_PIT ||
+   if ( board[nextPosition.y][nextPosition.x] == board_PIT ||
    board[nextPosition.y][nextPosition.x] == board_WUMPUS ) {
      return board_PLAYER_KILLED;
    }
@@ -59,6 +53,12 @@ PlayerMove board_MovePlayer(Board board, Position playerPosition,
    }
    else if ( board[nextPosition.y][nextPosition.x]>=BOARD_HEIGHT || board[nextPosition.y][nextPosition.x]>=BOARD_WIDTH) {
      return board_OUTSIDE_BOUNDS;
+   }
+   else /*( board[nextPosition.y][nextPosition.x] == board_EMPTY ||
+   board[nextPosition.y][nextPosition.x] == board_TRAVERSED )*/ {
+     board[nextPosition.y][nextPosition.x] = board_PLAYER;
+     board[playerPosition.y][playerPosition.x] = board_TRAVERSED;
+     return board_PLAYER_MOVED;
    }
 }
 
@@ -70,25 +70,25 @@ ArrowHit board_FireArrow(Board board, Position position) {
 void board_Display(Board board) {
    /* TODO */
    int row, column;
-   printf("\n     0    1    2    3    4  \n");
+   printf("\n   0  1  2  3  4  \n");
    for (row = 0; row < BOARD_WIDTH; row++) {
-      printf("  --------------------------\n");
+      printf(" ----------------\n");
       printf("%d", row);
         for (column = 0; column < BOARD_HEIGHT; column++) {
           if (board[row][column]==board_PIT)
-            printf(" | %s", PIT_OUTPUT);
+            printf("|%s", PIT_OUTPUT);
           else if (board[row][column]==board_BATS)
-            printf(" | %s", BATS_OUTPUT);
+            printf("|%s", BATS_OUTPUT);
           else if (board[row][column]==board_WUMPUS)
-              printf(" | %s", WUMPUS_OUTPUT);
+              printf("|%s", WUMPUS_OUTPUT);
           else if (board[row][column]==board_PLAYER)
-            printf(" | %s", PLAYER_OUTPUT);
+            printf("|%s", PLAYER_OUTPUT);
           else if (board[row][column]==board_TRAVERSED)
-            printf(" | %s", TRAVERSED_OUTPUT);  
+            printf("|%s", TRAVERSED_OUTPUT);
           else
-            printf(" | %s", EMPTY_OUTPUT);
+            printf("|%s", EMPTY_OUTPUT);
         }
-        printf(" |\n");
+        printf("|\n");
     }
 
 }
