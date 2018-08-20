@@ -47,8 +47,11 @@
 void game_PlayGame();
 
 Boolean getDirection();
+Boolean checkEmptySpace();
 void OptionLoadBoard();
 void displayGameMenu();
+
+void printCell();
 
 
 #endif
