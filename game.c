@@ -28,7 +28,7 @@ void game_PlayGame(){
 		"Please enter your choice: ", userLoadInput, sizeof(userLoadInput));
 		 firstChar = strtok(userLoadInput, " ");
 		if ( firstChar != NULL ){
-			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userLoadInput)) == 0) {
+			if ( strcmp(firstChar, COMMAND_QUIT) == 0) {
 				quit = TRUE;
 				break;
 			}
@@ -36,7 +36,7 @@ void game_PlayGame(){
 				secondChar = strtok(NULL, " ");
 				if ( secondChar != NULL ) {
 					int boardChoice = atoi(secondChar);
-					if ( strncmp(firstChar, COMMAND_LOAD, sizeof(userLoadInput))==0 &&
+					if ( strcmp(firstChar, COMMAND_LOAD)==0 &&
 								(boardChoice==1 || boardChoice==2)) {
 									OptionLoadBoard(currentBoard, boardChoice);
 									break;
@@ -69,7 +69,7 @@ void game_PlayGame(){
 
 		 firstChar = strtok(userInitInput, " ");
 		if ( firstChar != NULL ) {
-			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userInitInput)) == 0) {
+			if ( strcmp(firstChar, COMMAND_QUIT) == 0) {
 				quit = TRUE;
 				break;
 			}
@@ -80,7 +80,7 @@ void game_PlayGame(){
 					if ( thirdChar != NULL ) {
 						int positionX = atoi(secondChar);
 						int positionY = atoi(thirdChar);
-						if ( strncmp(firstChar, COMMAND_INIT, sizeof(userInitInput))==0 &&
+						if ( strcmp(firstChar, COMMAND_INIT)==0 &&
 							 ((positionX<=4 && positionX>=1) &&
 						 	 (positionY<=4 && positionY>=1))) {
 								 playerCurrentPosition.x=positionX;
@@ -131,11 +131,11 @@ void game_PlayGame(){
 
 		firstChar = strtok(userPlayInput, " ");
 		if ( firstChar != NULL ) {
-			if ( strncmp(firstChar, COMMAND_QUIT, sizeof(userPlayInput)) == 0) {
+			if ( strcmp(firstChar, COMMAND_QUIT) == 0) {
 				quit = TRUE;
 				break;
 			}
-			if ( strncmp(firstChar, COMMAND_NORTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_NORTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+			if ( strcmp(firstChar, COMMAND_NORTH) == 0 || strcmp(firstChar, COMMAND_NORTH_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
 				/*MOVE NORTH FUNCTION*/
 				if ( board_MovePlayer(currentBoard, playerCurrentPosition, player_GetNextPosition(playerCurrentPosition, player_NORTH) ) == board_PLAYER_MOVED ) {
@@ -149,34 +149,34 @@ void game_PlayGame(){
 				 continue;
 
 			}
-			else if ( strncmp(firstChar, COMMAND_SOUTH, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_SOUTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+			else if ( strcmp(firstChar, COMMAND_SOUTH) == 0 || strcmp(firstChar, COMMAND_SOUTH_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
 				/*MOVE SOUTH FUNCTION*/
 			}
-			else if ( strncmp(firstChar, COMMAND_EAST, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_EAST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+			else if ( strcmp(firstChar, COMMAND_EAST) == 0 || strcmp(firstChar, COMMAND_EAST_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
 				/*MOVE EAST FUNCTION*/
 			}
-			else if ( strncmp(firstChar, COMMAND_WEST, sizeof(userPlayInput)) == 0 || strncmp(firstChar, COMMAND_WEST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+			else if ( strcmp(firstChar, COMMAND_WEST) == 0 || strcmp(firstChar, COMMAND_WEST_SHORTCUT) == 0 ) {
 				printf("MOVE %s\n", firstChar);
 				/*MOVE WEST FUNCTION*/
 			}
 			else {
 				char *secondChar = strtok(NULL, " ");
-				if ( strncmp(firstChar, COMMAND_SHOOT, sizeof(userPlayInput)) == 0 && secondChar != NULL ) {
-					if ( strncmp(secondChar, COMMAND_NORTH, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_NORTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+				if ( strcmp(firstChar, COMMAND_SHOOT) == 0 && secondChar != NULL ) {
+					if ( strcmp(secondChar, COMMAND_NORTH) == 0 || strcmp(secondChar, COMMAND_NORTH_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
 						/*SHOOT NORTH FUNCTION*/
 					}
-					else if ( strncmp(secondChar, COMMAND_SOUTH, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_SOUTH_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+					else if ( strcmp(secondChar, COMMAND_SOUTH) == 0 || strcmp(secondChar, COMMAND_SOUTH_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
 						/*SHOOT SOUTH FUNCTION*/
 					}
-					else if ( strncmp(secondChar, COMMAND_EAST, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_EAST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+					else if ( strcmp(secondChar, COMMAND_EAST) == 0 || strcmp(secondChar, COMMAND_EAST_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
 						/*SHOOT EAST FUNCTION*/
 					}
-					else if ( strncmp(secondChar, COMMAND_WEST, sizeof(userPlayInput)) == 0 || strncmp(secondChar, COMMAND_WEST_SHORTCUT, sizeof(userPlayInput)) == 0 ) {
+					else if ( strcmp(secondChar, COMMAND_WEST) == 0 || strcmp(secondChar, COMMAND_WEST_SHORTCUT) == 0 ) {
 						printf("SHOOT %s\n", secondChar);
 						/*SHOOT WEST FUNCTION*/
 					}
