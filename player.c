@@ -1,6 +1,6 @@
 /*
  * COSC1076 Assignment 1, Semester 2 2018
- * Student name  : Adrian Lim
+ * Student name  : Adrian Lim Song En
  * Student number: s3710625
  */
 #include "player.h"
