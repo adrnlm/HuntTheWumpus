@@ -148,8 +148,6 @@ void game_PlayGame(){
 					do {
 						playerRandomPosition.x = rand()%(BOARD_HEIGHT);
 						playerRandomPosition.y = rand()%(BOARD_HEIGHT);
-						printf("Random X: %d\n", playerRandomPosition.x);
-						printf("Random Y: %d\n", playerRandomPosition.y);
 					} while( checkEmptySpace(currentBoard, playerRandomPosition) == FALSE );
 					currentBoard[playerRandomPosition.y][playerRandomPosition.x] = board_PLAYER;
 					currentBoard[playerCurrentPosition.y][playerCurrentPosition.x] = board_TRAVERSED;
