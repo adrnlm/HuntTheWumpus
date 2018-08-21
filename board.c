@@ -92,6 +92,7 @@ void board_Display( Board board ) {
         }
         printf("|\n");
     }
+    printf("  ----------------\n");
 
 }
 
