@@ -158,6 +158,7 @@ void game_PlayGame(){
 															 playerCurrentPosition,
 															 playerNextPosition ) ==
 															 	board_PLAYER_MOVED ) {
+					printf("Player moved.\n");
 					playerCurrentPosition = playerNextPosition;
 					player_UpdatePosition( &newPlayer, playerCurrentPosition );
 					continue;

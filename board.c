@@ -47,19 +47,20 @@ PlayerMove board_MovePlayer( Board board, Position playerPosition,
         board[nextPosition.y][nextPosition.x] == board_WUMPUS ) {
      return board_PLAYER_KILLED;
    }
-   else if ( board[nextPosition.y][nextPosition.x] == board_BATS ) {
-     return board_BAT_CELL;
-   }
    else if ( nextPosition.y >= BOARD_HEIGHT ||
              nextPosition.x >= BOARD_WIDTH ||
             nextPosition.x < 0 ||
             nextPosition.y < 0 ) {
      return board_OUTSIDE_BOUNDS;
    }
-   else {
+   else if ( board[nextPosition.y][nextPosition.x] == board_EMPTY ||
+             board[nextPosition.y][nextPosition.x] == board_TRAVERSED ) {
      board[nextPosition.y][nextPosition.x] = board_PLAYER;
      board[playerPosition.y][playerPosition.x] = board_TRAVERSED;
      return board_PLAYER_MOVED;
+   }
+   else {
+     return board_BAT_CELL;
    }
 }
 
@@ -78,7 +79,7 @@ ArrowHit board_FireArrow( Board board, Position position ) {
 void board_Display( Board board ) {
    /* TODO */
    int row, column;
-   printf("\n    0  1  2  3  4  \n");
+   printf("\n\n    0  1  2  3  4  \n");
    for ( row = 0; row < BOARD_WIDTH; row++ ) {
       printf("  ----------------\n");
       printf("%d ", row);
