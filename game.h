@@ -30,7 +30,6 @@
 #define MAXIMUM_INIT_PARAMETERS (EXTRA_SPACES + MAXIMUM_INIT_INPUT)
 #define MAXIMUM_PLAY_PARAMETERS (EXTRA_SPACES + MAXIMUM_PLAY_INPUT)
 
-
 /**
  * Main menu option 1 - play the game as per the specification.
  *
@@ -45,10 +44,26 @@
  * and marks are allocated to good coding practices.
  */
 void game_PlayGame();
-Boolean getDirection();
-Boolean checkEmptySpace();
-void OptionLoadBoard();
-void displayGameMenu();
 
+/**
+ * Gets direction from user input and assign that to a temporary position and
+ * return true
+ */
+Boolean getDirection();
+
+/**
+ * Checks for empty spaces for player to move and return true/ false
+ */
+Boolean checkEmptySpace();
+
+/**
+ *Load stated board by the user
+ */
+void OptionLoadBoard();
+
+/**
+ *Prints out the display menu
+ */
+void displayGameMenu();
 
 #endif

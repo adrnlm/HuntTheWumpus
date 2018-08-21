@@ -240,6 +240,7 @@ void game_PlayGame(){
 	srand(0);
 }
 
+
 Boolean checkEmptySpace( Board board, Position position ){
 	if ( board[position.y][position.x] == board_EMPTY ||  board[position.y][position.x] == board_TRAVERSED )
 		return TRUE;

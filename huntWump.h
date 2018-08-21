@@ -22,7 +22,11 @@
  * them when printing.
  */
 void showStudentInformation();
+
+/**
+ * Print out Hunt The Wumpus Menu
+ */
 void displayWumpusMenu();
-void playGame();
+
 
 #endif
