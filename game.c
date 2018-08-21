@@ -151,7 +151,7 @@ void game_PlayGame(){
 				quit = TRUE;
 				break;
 			}
-			if ( getDirection( firstChar, &moveDirection )){
+			if ( getDirection( firstChar, &moveDirection )) {
 				playerNextPosition = player_GetNextPosition( playerCurrentPosition,
 																										 moveDirection );
 				if ( board_MovePlayer( currentBoard,
@@ -241,8 +241,7 @@ void game_PlayGame(){
 	srand(0);
 }
 
-
-Boolean checkEmptySpace( Board board, Position position ){
+Boolean checkEmptySpace( Board board, Position position ) {
 	if ( board[position.y][position.x] == board_EMPTY ||  board[position.y][position.x] == board_TRAVERSED )
 		return TRUE;
 	else
