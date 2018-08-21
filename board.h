@@ -30,11 +30,6 @@ typedef enum cell
 #define PLAYER_OUTPUT "##"
 #define TRAVERSED_OUTPUT "**"
 
-#define PIT_OUTPUT "00"
-#define BATS_OUTPUT "^^"
-#define WUMPUS_OUTPUT "WW"
-
-
 typedef Cell Board[BOARD_HEIGHT][BOARD_WIDTH];
 
 Board BOARD_1, BOARD_2;

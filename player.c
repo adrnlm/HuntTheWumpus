@@ -10,7 +10,6 @@ void player_Initialise(Player * player, Position position){
    player->numArrows = INIT_ARROW_COUNT;
 }
 
-
 Position player_GetNextPosition(Position position, Direction direction){
    switch (direction) {
      case 0:

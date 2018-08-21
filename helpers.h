@@ -35,7 +35,6 @@ typedef enum boolean
  **/
 void readRestOfLine();
 
-/* TODO not provided */
 typedef enum
 {
 	ReadInputResultNull, ReadInputResultOverflow, ReadInputResultSuccess

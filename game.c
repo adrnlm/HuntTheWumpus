@@ -12,8 +12,8 @@ void game_PlayGame(){
 	char userInitInput[MAXIMUM_INIT_PARAMETERS];
 	char userPlayInput[MAXIMUM_PLAY_PARAMETERS];
 	Player newPlayer;
-	Direction setDirection;
-	Position playerCurrentPosition, playerNextPosition, playerRandomPosition;
+	Direction moveDirection, shootDirection;
+	Position playerCurrentPosition, playerNextPosition, playerRandomPosition, playerShootDirection;
 	int quit=FALSE;
 	displayGameMenu();
 	getInput("Press enter to continue...", enterButton, sizeof(enterButton));
@@ -135,13 +135,11 @@ void game_PlayGame(){
 				quit = TRUE;
 				break;
 			}
-			if ( getDirection(firstChar, &setDirection) ){
-				printf("MOVE %s\n", firstChar);
-				playerNextPosition = player_GetNextPosition(playerCurrentPosition, setDirection);
+			if ( getDirection(firstChar, &moveDirection) ){
+				playerNextPosition = player_GetNextPosition(playerCurrentPosition, moveDirection);
 				if ( board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition ) == board_PLAYER_MOVED ) {
 					playerCurrentPosition = playerNextPosition;
 					player_UpdatePosition(&newPlayer, playerCurrentPosition);
-					printf("MOVED %s\n", firstChar);
 					continue;
 				}
 				else if ( board_MovePlayer(currentBoard, playerCurrentPosition, playerNextPosition ) == board_BAT_CELL ) {
@@ -152,7 +150,6 @@ void game_PlayGame(){
 						playerRandomPosition.y = rand()%(BOARD_HEIGHT);
 						printf("Random X: %d\n", playerRandomPosition.x);
 						printf("Random Y: %d\n", playerRandomPosition.y);
-						printCell(currentBoard, playerRandomPosition);
 					} while( checkEmptySpace(currentBoard, playerRandomPosition) == FALSE );
 					currentBoard[playerRandomPosition.y][playerRandomPosition.x] = board_PLAYER;
 					currentBoard[playerCurrentPosition.y][playerCurrentPosition.x] = board_TRAVERSED;
@@ -171,10 +168,28 @@ void game_PlayGame(){
 			}
 			else {
 				char *secondChar = strtok(NULL, " ");
-				if ( strcmp(firstChar, COMMAND_SHOOT) == 0 && getDirection(secondChar, &setDirection) == TRUE ) {
+				if ( strcmp(firstChar, COMMAND_SHOOT) == 0 && getDirection(secondChar, &shootDirection) == TRUE ) {
 					/*SHOOT FUNCTION*/
-						printf("SHOOT %s\n", secondChar);
+					if ( newPlayer.numArrows>0 ) {
+						playerShootDirection = player_GetNextPosition(playerCurrentPosition, shootDirection);
+						if ( board_FireArrow(currentBoard, playerShootDirection) == board_WUMPUS_KILLED ){
+							printf("You killed the wumpus!\n");
+							break;
+						}
+						else if ( board_FireArrow(currentBoard, playerShootDirection) == board_ARROW_MISSED ){
+							newPlayer.numArrows--;
+							printf("Missed. You now have %d arrows.\n", newPlayer.numArrows);
+							continue;
+						}
+						else {
+							printf("Unable to fire arrow in that direction.\n");
+							continue;
+						}
+					}
+					else {
+						printf("You don't have any more arrows to fire\n");
 						continue;
+					}
 				}
 				else {
 					printInvalidInput();
@@ -188,22 +203,6 @@ void game_PlayGame(){
 		}
 	}
 	srand(0);
-}
-
-/*Used to test what cell is being randomed*/
-void printCell(Board board, Position position){
-	if ( board[position.y][position.x] == board_EMPTY )
-		printf("CELL NUM: board_EMPTY\n");
-	else if ( board[position.y][position.x] == board_TRAVERSED )
-			printf("CELL NUM: board_TRAVERSED\n");
-			else if ( board[position.y][position.x] == board_BATS )
-					printf("CELL NUM: board_BATS\n" );
-					else if ( board[position.y][position.x] == board_PIT )
-							printf("CELL NUM: board_PIT\n" );
-							else if ( board[position.y][position.x] == board_WUMPUS )
-									printf("CELL NUM: board_WUMPUS\n" );
-									else
-										printf("CELL NUM: board_PLAYER\n" );
 }
 
 Boolean checkEmptySpace(Board board, Position position){
@@ -233,7 +232,6 @@ Boolean getDirection(char *userDirectionInput, Direction *tmpDirection) {
 	else
 		return FALSE;
 }
-
 
 void OptionLoadBoard(Board board, int userLoadChoice) {
     if ( userLoadChoice == 1 ){
