@@ -8,30 +8,32 @@
 #include "huntWump.h"
 
 int main() {
-  char userMenuInput[USER_MAX_INPUT];
-  int menuInput=0;
+  char userMenuInput[ USER_MAX_INPUT ];
+  int menuInput = 0;
     do{
       displayWumpusMenu();
       while (TRUE) {
-        char * menuPromt ="Please Enter your choice: ";
-        getInput(menuPromt, userMenuInput, USER_MENU_INPUT_PARAMETER);
-        menuInput = atoi(userMenuInput);
-        if(!(menuInput<4 && menuInput>0)) {
+        char * menuPromt = "Please Enter your choice: ";
+        getInput( menuPromt,
+                  userMenuInput,
+                  USER_MENU_INPUT_PARAMETER ) ;
+        menuInput = atoi( userMenuInput );
+        if( !( menuInput<4 && menuInput>0 )) {
           printInvalidInput();
           continue;
         }
         else
           break;
       }
-        switch(menuInput) {
+        switch( menuInput ) {
           case 1:
             game_PlayGame();
-            menuInput=0;
+            menuInput = 0;
             break;
 
           case 2:
             showStudentInformation();
-            menuInput=0;
+            menuInput = 0;
             break;
 
           case 3:
@@ -39,9 +41,8 @@ int main() {
             break;
         }
 
-    }while(menuInput > 3 || menuInput < 1);
-
-
+    }while( menuInput > 3 || menuInput < 1 );
+    
    return EXIT_SUCCESS;
 }
 

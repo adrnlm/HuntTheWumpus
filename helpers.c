@@ -5,8 +5,7 @@
  */
 #include "helpers.h"
 
-void readRestOfLine()
-{
+void readRestOfLine() {
 	int ch;
 	while(ch = getc(stdin), ch != EOF && ch != '\n')
 	{ } /* Gobble each character. */
@@ -15,8 +14,7 @@ void readRestOfLine()
 	clearerr(stdin);
 }
 
-ReadInputResult readInput(char * str, int num, FILE * stream)
-{
+ReadInputResult readInput(char * str, int num, FILE * stream) {
 	char * result;
 
 	result = fgets(str, num, stream);
@@ -36,8 +34,7 @@ ReadInputResult readInput(char * str, int num, FILE * stream)
 	}
 }
 
-ReadInputResult getInput(char * prompt, char * input, int inputSize)
-{
+ReadInputResult getInput(char * prompt, char * input, int inputSize) {
 	ReadInputResult readInputResult;
 
 	while(TRUE)
@@ -56,13 +53,11 @@ ReadInputResult getInput(char * prompt, char * input, int inputSize)
 	}
 }
 
-void printInvalidInput()
-{
+void printInvalidInput() {
 	printf("Invalid input. \n\n");
 }
 
-void enableWindowsCompatibility()
-{
+void enableWindowsCompatibility() {
 	/* Disable buffering on stdout - this is typically an issue on Windows. */
 	setbuf(stdout, NULL);
 

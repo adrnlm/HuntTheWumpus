@@ -5,13 +5,13 @@
  */
 #include "player.h"
 
-void player_Initialise(Player * player, Position position){
+void player_Initialise( Player * player, Position position ) {
    player->position = position;
    player->numArrows = INIT_ARROW_COUNT;
 }
 
-Position player_GetNextPosition(Position position, Direction direction){
-   switch (direction) {
+Position player_GetNextPosition( Position position, Direction direction ){
+   switch ( direction ) {
      case 0:
       position.y--;
       break;
@@ -29,6 +29,6 @@ Position player_GetNextPosition(Position position, Direction direction){
    return position;
 }
 
-void player_UpdatePosition(Player * player, Position position) {
+void player_UpdatePosition( Player * player, Position position ) {
    player->position=position;
 }
