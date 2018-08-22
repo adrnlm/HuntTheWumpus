@@ -30,5 +30,5 @@ Position player_GetNextPosition( Position position, Direction direction ){
 }
 
 void player_UpdatePosition( Player * player, Position position ) {
-   player->position=position;
+  player->position=position;
 }

@@ -171,7 +171,7 @@ void game_PlayGame(){
 											board_BAT_CELL ) {
 					/*Random Placement*/
 					printf("Bat Cell!\n");
-					do {
+					/*do {
 						playerRandomPosition.x = rand() % ( BOARD_HEIGHT );
 						playerRandomPosition.y = rand() % ( BOARD_HEIGHT );
 					} while( checkEmptySpace( currentBoard,
@@ -180,8 +180,10 @@ void game_PlayGame(){
 						board_PLAYER;
 					currentBoard[ playerCurrentPosition.y ][ playerCurrentPosition.x ] =
 						board_TRAVERSED;
-					playerCurrentPosition = playerRandomPosition;
-					player_UpdatePosition( &newPlayer, playerCurrentPosition );
+
+					playerCurrentPosition = playerRandomPosition;*/
+
+					player_UpdatePosition( &newPlayer, batRandom( currentBoard, playerRandomPosition, playerCurrentPosition ));
 					continue;
 				}
 				else if ( board_MovePlayer( currentBoard,
@@ -243,7 +245,16 @@ void game_PlayGame(){
 	srand(0);
 }
 
-Position batRandom( Pos) {}
+Position batRandom( Board board, Position randPosition, Position curPosition ) {
+	do {
+		randPosition.x = rand() % BOARD_HEIGHT;
+		randPosition.y = rand() % BOARD_HEIGHT;
+	} while( checkEmptySpace( board, randPosition ) == FALSE );
+	board_MovePlayer( board, curPosition, randPosition);
+	curPosition = randPosition;
+	return curPosition;
+
+}
 
 Boolean checkEmptySpace( Board board, Position position ) {
 	if ( board[position.y][position.x] == board_EMPTY ||  board[position.y][position.x] == board_TRAVERSED )

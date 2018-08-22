@@ -68,4 +68,6 @@ void OptionLoadBoard();
  */
 void displayGameMenu();
 
+Position batRandom();
+
 #endif
