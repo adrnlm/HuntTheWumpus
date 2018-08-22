@@ -240,6 +240,27 @@ void game_PlayGame(){
 	srand(0);
 }
 
+Choice playerChoice(char * input) {
+	if ( strncmp(input, COMMAND_QUIT, USER_MAX_INPUT) == 0 )
+		return choice_quit;
+	else if ( strncmp(input, COMMAND_LOAD, USER_MAX_INPUT) == 0 )
+		return choice_load;
+	else if ( strncmp(input, COMMAND_INIT, USER_MAX_INPUT) == 0)
+		return choice_init;
+	else if ( strncmp(input, COMMAND_SHOOT, USER_MAX_INPUT) == 0 )
+		return choice_shoot;
+	else if ( strncmp(input, COMMAND_NORTH, USER_MAX_INPUT) == 0 || strncmp(input, COMMAND_NORTH_SHORTCUT, USER_MAX_INPUT) == 0 )
+		return choice_north;
+	else if ( strncmp(input, COMMAND_SOUTH, USER_MAX_INPUT) == 0 || strncmp(input, COMMAND_SOUTH_SHORTCUT, USER_MAX_INPUT) == 0 )
+		return choice_shoot;
+	else if ( strncmp(input, COMMAND_EAST, USER_MAX_INPUT) == 0 || strncmp(input, COMMAND_EAST_SHORTCUT, USER_MAX_INPUT) == 0)
+		return choice_east;
+	else if ( strncmp(input, COMMAND_WEST, USER_MAX_INPUT) == 0 || strncmp(input, COMMAND_WEST_SHORTCUT, USER_MAX_INPUT) == 0)
+		return choice_west;
+	else
+		return choice_invalid;
+}
+
 Boolean initFunction(Board board, char *userInput, Player player) {
 	char *firstChar;
 	char *secondChar;
@@ -316,41 +337,28 @@ Boolean loadFunction(Board board, char *userInput ){
 	char *secondChar;
 	int boardChoice;
 	getInput("At this stage of the program, only two commands are acceptable:\n"
-					 "load <g>\n"
-					 "quit\n\n"
-					 "Please enter your choice: ",
-						userInput,
-						sizeof( userInput ));
+	"load <g>\n"
+	"quit\n\n"
+	"Please enter your choice: ",
+	userInput,
+	sizeof( userInput ));
 
-	 firstChar = strtok( userInput, " " );
-	if ( firstChar != NULL ){
-		if ( strcmp( firstChar, COMMAND_QUIT ) == 0 ) {
+	if ( playerChoice(userInput) == 0 ) {
+		return TRUE;
+	}
+	firstChar = strtok( userInput, " " );
+	if ( playerChoice(firstChar) == 1 ) {
+		secondChar = strtok(NULL, "\n");
+		boardChoice = atoi ( secondChar );
+		if ( boardChoice == 1 || boardChoice == 2 ) {
+			OptionLoadBoard(board, boardChoice);
 			return TRUE;
 		}
-		else {
-			secondChar = strtok(NULL, " ");
-			if ( secondChar != NULL ) {
-				boardChoice = atoi( secondChar );
-				if ( strcmp( firstChar, COMMAND_LOAD )==0 &&
-							( boardChoice==1 || boardChoice==2 )) {
-								OptionLoadBoard( board, boardChoice );
-								return TRUE;
-							}
-				else {
-					printInvalidInput();
-					return FALSE;
-				}
-			}
-			else {
-				printInvalidInput();
-				return FALSE;
-			}
-		}
-	}
-	else {
-		printInvalidInput();
+		else
 		return FALSE;
 	}
+	else
+	return FALSE;
 }
 
 Position batRandom( Board board, Position playerPosition ) {

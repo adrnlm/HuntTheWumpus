@@ -32,6 +32,18 @@
 #define MAXIMUM_INIT_PARAMETERS (EXTRA_SPACES + MAXIMUM_INIT_INPUT)
 #define MAXIMUM_PLAY_PARAMETERS (EXTRA_SPACES + MAXIMUM_PLAY_INPUT)
 
+typedef enum choice {
+  choice_quit, /*0*/
+  choice_load, /*1*/
+  choice_init, /*2*/
+  choice_shoot, /*3*/
+  choice_north, /*4*/
+  choice_south, /*5*/
+  choice_east, /*6*/
+  choice_west, /*7*/
+  choice_invalid /*8*/
+} Choice;
+
 /**
  * Main menu option 1 - play the game as per the specification.
  *
