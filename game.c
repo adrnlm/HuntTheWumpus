@@ -24,7 +24,7 @@ void game_PlayGame(){
 
 	/*LOAD OPTION*/
 	while ( quit==FALSE ) {
-		char *firstChar;
+		/*	char *firstChar;
 		char *secondChar;
 		getInput("At this stage of the program, only two commands are"
 						 "acceptable:\n"
@@ -63,7 +63,11 @@ void game_PlayGame(){
 		else {
 			printInvalidInput();
 			continue;
-		}
+		}*/
+		if ( loadFunction(currentBoard, userLoadInput) == TRUE )
+			break;
+			else
+	 	continue;
 	}
 
 	/*INIT OPTION*/
@@ -128,6 +132,10 @@ void game_PlayGame(){
 			printInvalidInput();
 			continue;
 		}
+	/*	if ( initFunction( currentBoard, userInitInput, &newPlayer, &playerCurrentPosition ) == TRUE )
+			break;
+		else
+			continue;*/
 	}
 
 	/*PLAY OPTIONS*/
@@ -170,20 +178,6 @@ void game_PlayGame(){
 											board_BAT_CELL ) {
 					/*Random Placement*/
 					printf("Bat Cell!\n");
-<<<<<<< HEAD
-=======
-					/*do {
-						playerRandomPosition.x = rand() % ( BOARD_HEIGHT );
-						playerRandomPosition.y = rand() % ( BOARD_HEIGHT );
-					} while( checkEmptySpace( currentBoard,
-																		playerRandomPosition ) == FALSE );
-					currentBoard[ playerRandomPosition.y ][ playerRandomPosition.x ] =
-						board_PLAYER;
-					currentBoard[ playerCurrentPosition.y ][ playerCurrentPosition.x ] =
-						board_TRAVERSED;
-
-					playerCurrentPosition = playerRandomPosition;*/
->>>>>>> 7225f3c042c97b12e782c562cbc015948997fd94
 					playerCurrentPosition = batRandom( currentBoard, playerCurrentPosition );
 					player_UpdatePosition( &newPlayer, playerCurrentPosition);
 					continue;
@@ -245,6 +239,119 @@ void game_PlayGame(){
 	}
 
 	srand(0);
+}
+
+Boolean initFunction(Board board, char *userInput, Player player, Position curPosition) {
+	char *firstChar;
+	char *secondChar;
+	int positionX, positionY;
+	getInput( "At this stage of the program, only two commands are "
+						"acceptable:\n"
+						"init <x>,<y>\n"
+						"quit\n\n"
+						"Please enter your choice: ",
+							userInput,
+							sizeof(userInput));
+
+	 firstChar = strtok( userInput, " " );
+	if ( firstChar != NULL ) {
+		if ( strcmp( firstChar, COMMAND_QUIT ) == 0) {
+			/*quit = TRUE;
+			break;*/
+			return TRUE;
+		}
+		else {
+			secondChar = strtok( NULL, "," );
+			if ( secondChar != NULL ) {
+				char *thirdChar = strtok( NULL, " " );
+				if ( thirdChar != NULL ) {
+					positionX = atoi( secondChar );
+					positionY = atoi( thirdChar );
+					if ( strcmp(firstChar, COMMAND_INIT )==0 &&
+							(( positionX<=4 && positionX>=1 ) &&
+							 ( positionY<=4 && positionY>=1 ))) {
+							 /*playerCurrentPosition*/curPosition.x = positionX;
+							 /*playerCurrentPosition*/curPosition.y = positionY;
+							 if ( board_PlacePlayer( board,
+																			 curPosition ) ==
+																				TRUE ) {
+								player_Initialise( &player, curPosition );
+								printf( "Player Initialized\n" );
+								/*break;*/
+								return TRUE;
+							}
+							else {
+								printf( "Invalid Space\n\n" );
+								/*continue;*/
+								return FALSE;
+							}
+						}
+					else {
+						printInvalidInput();
+						return FALSE;
+					}
+				}
+				else {
+					printInvalidInput();
+					return FALSE;
+				}
+			}
+			else {
+				printInvalidInput();
+				return FALSE;
+			}
+		}
+	}
+	else {
+		printInvalidInput();
+		return FALSE;
+	}
+}
+
+Boolean loadFunction(Board board, char *userInput ){
+	char *firstChar;
+	char *secondChar;
+	int boardChoice;
+	getInput("At this stage of the program, only two commands are"
+					 "acceptable:\n"
+					 "load <g>\n"
+					 "quit\n\n"
+					 "Please enter your choice: ",
+						userInput/*userLoadInput*/,
+						sizeof( userInput/*userLoadInput*/ ));
+
+	 firstChar = strtok( userInput/*userLoadInput*/, " " );
+	if ( firstChar != NULL ){
+		if ( strcmp( firstChar, COMMAND_QUIT ) == 0 ) {
+			/*quit = TRUE;
+			break;*/
+			return TRUE;
+		}
+		else {
+			secondChar = strtok(NULL, " ");
+			if ( secondChar != NULL ) {
+				boardChoice = atoi( secondChar );
+				if ( strcmp( firstChar, COMMAND_LOAD )==0 &&
+							( boardChoice==1 || boardChoice==2 )) {
+								OptionLoadBoard( board/*currentBoard*/, boardChoice );
+								/*break;*/
+								return TRUE;
+							}
+				else {
+					printInvalidInput();
+					/*continue*/return FALSE;
+				}
+			}
+			else {
+				printInvalidInput();
+				/*continue*/return FALSE;
+			}
+		}
+	}
+	else {
+		printInvalidInput();
+		/*continue*/return FALSE;
+	}
 }
 
 Position batRandom( Board board, Position playerPosition ) {
