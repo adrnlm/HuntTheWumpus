@@ -74,8 +74,7 @@ void game_PlayGame(){
 	while ( quit==FALSE ) {
 		char *firstChar;
 		char *secondChar;
-		getInput( "At this stage of the program, only two commands are "
-							"acceptable:\n"
+		getInput( "At this stage of the program, only two commands are acceptable:\n"
 							"init <x>,<y>\n"
 							"quit\n\n"
 							"Please enter your choice: ",
@@ -132,10 +131,10 @@ void game_PlayGame(){
 			printInvalidInput();
 			continue;
 		}
-	/*	if ( initFunction( currentBoard, userInitInput, &newPlayer, &playerCurrentPosition ) == TRUE )
+		/*if ( initFunction( currentBoard, userInitInput, &newPlayer ) == TRUE )
 			break;
 		else
-			continue;*/
+			continue; */
 	}
 
 	/*PLAY OPTIONS*/
@@ -241,12 +240,12 @@ void game_PlayGame(){
 	srand(0);
 }
 
-Boolean initFunction(Board board, char *userInput, Player player, Position curPosition) {
+Boolean initFunction(Board board, char *userInput, Player player) {
 	char *firstChar;
 	char *secondChar;
+	Position curPosition;
 	int positionX, positionY;
-	getInput( "At this stage of the program, only two commands are "
-						"acceptable:\n"
+	getInput( "At this stage of the program, only two commands are acceptable:\n"
 						"init <x>,<y>\n"
 						"quit\n\n"
 						"Please enter your choice: ",
@@ -287,10 +286,56 @@ Boolean initFunction(Board board, char *userInput, Player player, Position curPo
 							}
 						}
 					else {
+						printf( "Error 1\n\n" );
 						printInvalidInput();
 						return FALSE;
 					}
 				}
+				else {
+					printf( "Error 2\n\n" );
+					printInvalidInput();
+					return FALSE;
+				}
+			}
+			else {
+				printf( "Error 3\n\n" );
+				printInvalidInput();
+				return FALSE;
+			}
+		}
+	}
+	else {
+		printf( "Error 4\n\n" );
+		printInvalidInput();
+		return FALSE;
+	}
+}
+
+Boolean loadFunction(Board board, char *userInput ){
+	char *firstChar;
+	char *secondChar;
+	int boardChoice;
+	getInput("At this stage of the program, only two commands are acceptable:\n"
+					 "load <g>\n"
+					 "quit\n\n"
+					 "Please enter your choice: ",
+						userInput,
+						sizeof( userInput ));
+
+	 firstChar = strtok( userInput, " " );
+	if ( firstChar != NULL ){
+		if ( strcmp( firstChar, COMMAND_QUIT ) == 0 ) {
+			return TRUE;
+		}
+		else {
+			secondChar = strtok(NULL, " ");
+			if ( secondChar != NULL ) {
+				boardChoice = atoi( secondChar );
+				if ( strcmp( firstChar, COMMAND_LOAD )==0 &&
+							( boardChoice==1 || boardChoice==2 )) {
+								OptionLoadBoard( board, boardChoice );
+								return TRUE;
+							}
 				else {
 					printInvalidInput();
 					return FALSE;
@@ -305,52 +350,6 @@ Boolean initFunction(Board board, char *userInput, Player player, Position curPo
 	else {
 		printInvalidInput();
 		return FALSE;
-	}
-}
-
-Boolean loadFunction(Board board, char *userInput ){
-	char *firstChar;
-	char *secondChar;
-	int boardChoice;
-	getInput("At this stage of the program, only two commands are"
-					 "acceptable:\n"
-					 "load <g>\n"
-					 "quit\n\n"
-					 "Please enter your choice: ",
-						userInput/*userLoadInput*/,
-						sizeof( userInput/*userLoadInput*/ ));
-
-	 firstChar = strtok( userInput/*userLoadInput*/, " " );
-	if ( firstChar != NULL ){
-		if ( strcmp( firstChar, COMMAND_QUIT ) == 0 ) {
-			/*quit = TRUE;
-			break;*/
-			return TRUE;
-		}
-		else {
-			secondChar = strtok(NULL, " ");
-			if ( secondChar != NULL ) {
-				boardChoice = atoi( secondChar );
-				if ( strcmp( firstChar, COMMAND_LOAD )==0 &&
-							( boardChoice==1 || boardChoice==2 )) {
-								OptionLoadBoard( board/*currentBoard*/, boardChoice );
-								/*break;*/
-								return TRUE;
-							}
-				else {
-					printInvalidInput();
-					/*continue*/return FALSE;
-				}
-			}
-			else {
-				printInvalidInput();
-				/*continue*/return FALSE;
-			}
-		}
-	}
-	else {
-		printInvalidInput();
-		/*continue*/return FALSE;
 	}
 }
 
