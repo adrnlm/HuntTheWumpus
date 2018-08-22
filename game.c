@@ -170,6 +170,20 @@ void game_PlayGame(){
 											board_BAT_CELL ) {
 					/*Random Placement*/
 					printf("Bat Cell!\n");
+<<<<<<< HEAD
+=======
+					/*do {
+						playerRandomPosition.x = rand() % ( BOARD_HEIGHT );
+						playerRandomPosition.y = rand() % ( BOARD_HEIGHT );
+					} while( checkEmptySpace( currentBoard,
+																		playerRandomPosition ) == FALSE );
+					currentBoard[ playerRandomPosition.y ][ playerRandomPosition.x ] =
+						board_PLAYER;
+					currentBoard[ playerCurrentPosition.y ][ playerCurrentPosition.x ] =
+						board_TRAVERSED;
+
+					playerCurrentPosition = playerRandomPosition;*/
+>>>>>>> 7225f3c042c97b12e782c562cbc015948997fd94
 					playerCurrentPosition = batRandom( currentBoard, playerCurrentPosition );
 					player_UpdatePosition( &newPlayer, playerCurrentPosition);
 					continue;
