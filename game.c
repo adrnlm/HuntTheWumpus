@@ -17,7 +17,6 @@ void game_PlayGame(){
 	 					shootDirection;
 	Position playerCurrentPosition,
 					 playerNextPosition,
-					 playerRandomPosition,
 					 playerShootDirection;
 	int quit=FALSE;
 	displayGameMenu();
@@ -171,19 +170,8 @@ void game_PlayGame(){
 											board_BAT_CELL ) {
 					/*Random Placement*/
 					printf("Bat Cell!\n");
-					/*do {
-						playerRandomPosition.x = rand() % ( BOARD_HEIGHT );
-						playerRandomPosition.y = rand() % ( BOARD_HEIGHT );
-					} while( checkEmptySpace( currentBoard,
-																		playerRandomPosition ) == FALSE );
-					currentBoard[ playerRandomPosition.y ][ playerRandomPosition.x ] =
-						board_PLAYER;
-					currentBoard[ playerCurrentPosition.y ][ playerCurrentPosition.x ] =
-						board_TRAVERSED;
-
-					playerCurrentPosition = playerRandomPosition;*/
-
-					player_UpdatePosition( &newPlayer, batRandom( currentBoard, playerRandomPosition, playerCurrentPosition ));
+					playerCurrentPosition = batRandom( currentBoard, playerCurrentPosition );
+					player_UpdatePosition( &newPlayer, playerCurrentPosition);
 					continue;
 				}
 				else if ( board_MovePlayer( currentBoard,
@@ -245,14 +233,14 @@ void game_PlayGame(){
 	srand(0);
 }
 
-Position batRandom( Board board, Position randPosition, Position curPosition ) {
+Position batRandom( Board board, Position playerPosition ) {
+	Position randomPosition;
 	do {
-		randPosition.x = rand() % BOARD_HEIGHT;
-		randPosition.y = rand() % BOARD_HEIGHT;
-	} while( checkEmptySpace( board, randPosition ) == FALSE );
-	board_MovePlayer( board, curPosition, randPosition);
-	curPosition = randPosition;
-	return curPosition;
+		randomPosition.x = rand() % BOARD_HEIGHT;
+		randomPosition.y = rand() % BOARD_HEIGHT;
+	} while( checkEmptySpace( board, randomPosition ) == FALSE );
+	board_MovePlayer( board, playerPosition, randomPosition);
+	return randomPosition;
 
 }
 
