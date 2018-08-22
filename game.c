@@ -8,6 +8,7 @@
 void game_PlayGame(){
 	Board currentBoard;
 	char enterButton[USER_MAX_INPUT];
+	char userQuitInput[MAXIMUM_QUIT_PARAMETERS];
 	char userLoadInput[MAXIMUM_LOAD_PARAMETERS];
 	char userInitInput[MAXIMUM_INIT_PARAMETERS];
 	char userPlayInput[MAXIMUM_PLAY_PARAMETERS];
@@ -145,9 +146,9 @@ void game_PlayGame(){
 								userPlayInput,
 								sizeof( userPlayInput ));
 
-		firstChar = strtok( userPlayInput, " " );
+		firstChar = strtok( userPlayInput, " \n" );
 		if ( firstChar != NULL ) {
-			if ( strcmp( firstChar, COMMAND_QUIT ) == 0 ) {
+			if ( strncmp( firstChar, COMMAND_QUIT, sizeof( userQuitInput )) == 0 ) {
 				quit = TRUE;
 				break;
 			}
@@ -238,8 +239,11 @@ void game_PlayGame(){
 			continue;
 		}
 	}
+
 	srand(0);
 }
+
+Position batRandom( Pos) {}
 
 Boolean checkEmptySpace( Board board, Position position ) {
 	if ( board[position.y][position.x] == board_EMPTY ||  board[position.y][position.x] == board_TRAVERSED )

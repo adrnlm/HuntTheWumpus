@@ -77,7 +77,6 @@ ArrowHit board_FireArrow( Board board, Position position ) {
 }
 
 void board_Display( Board board ) {
-   /* TODO */
    int row, column;
    printf("\n\n    0  1  2  3  4  \n");
    for ( row = 0; row < BOARD_WIDTH; row++ ) {
