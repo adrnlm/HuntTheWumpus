@@ -70,4 +70,8 @@ void displayGameMenu();
 
 Position batRandom();
 
+Boolean loadFunction();
+
+Boolean initFunction();
+
 #endif
