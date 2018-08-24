@@ -37,7 +37,9 @@ void readRestOfLine();
 
 typedef enum
 {
-	ReadInputResultNull, ReadInputResultOverflow, ReadInputResultSuccess
+	ReadInputResultNull,
+	ReadInputResultOverflow,
+	ReadInputResultSuccess
 } ReadInputResult;
 
 ReadInputResult readInput(char * str, int num, FILE * stream);

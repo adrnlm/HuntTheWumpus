@@ -22,27 +22,36 @@
 #define COMMAND_WEST_SHORTCUT "w"
 #define COMMAND_SHOOT "shoot"
 #define COMMAND_QUIT "quit"
-#define USER_MAX_INPUT 10
-#define MAXIMUM_QUIT_INPUT 4
-#define MAXIMUM_LOAD_INPUT 6
-#define MAXIMUM_INIT_INPUT 8
-#define MAXIMUM_PLAY_INPUT 11
-#define MAXIMUM_QUIT_PARAMETERS (EXTRA_SPACES + MAXIMUM_QUIT_INPUT)
-#define MAXIMUM_LOAD_PARAMETERS (EXTRA_SPACES + MAXIMUM_LOAD_INPUT)
-#define MAXIMUM_INIT_PARAMETERS (EXTRA_SPACES + MAXIMUM_INIT_INPUT)
-#define MAXIMUM_PLAY_PARAMETERS (EXTRA_SPACES + MAXIMUM_PLAY_INPUT)
+#define USER_MAX_INPUT ( EXTRA_SPACES + 10 )
+#define MAX_LOAD_INPUT ( EXTRA_SPACES + 6 )
+#define MAX_INIT_INPUT ( EXTRA_SPACES + 8 )
+#define MAX_PLAY_INPUT ( EXTRA_SPACES + 7 )
+
+#define displayLoadMenu "At this stage of the program, only two commands are acceptable:\nload <g>\nquit\n\n Please enter your choice: "
+#define displayInitMenu "At this stage of the program, only two commands are acceptable:\ninit <x>,<y>\nquit\n\nPlease enter your choice: "
+#define displayPlayMenu "\n\nAt this stage of the program, only three commands are acceptable:\n<directions>\nshoot <directions>\nquit\nWhere <direction> is one of: north,n,south,s,east,e,west,w\n\nPlease enter your choice: "
 
 typedef enum choice {
   choice_quit, /*0*/
   choice_load, /*1*/
   choice_init, /*2*/
   choice_shoot, /*3*/
-  choice_north, /*4*/
-  choice_south, /*5*/
-  choice_east, /*6*/
-  choice_west, /*7*/
-  choice_invalid /*8*/
+  choice_invalid /*4*/
 } Choice;
+
+typedef enum process {
+  process_fail,
+  process_quit,
+  process_success,
+  invalid_space,
+  process_end
+} Process;
+
+typedef enum moveResults {
+  moved,
+  killed,
+  out_of_bounds
+} MoveResults;
 
 /**
  * Main menu option 1 - play the game as per the specification.
@@ -59,31 +68,30 @@ typedef enum choice {
  */
 void game_PlayGame();
 
-/**
- * Gets direction from user input and assign that to a temporary position and
- * return true
- */
-Boolean getDirection();
+Choice playerChoice();
 
-/**
- * Checks for empty spaces for player to move and return true/ false
- */
+Process loadFunction();
+
+Process initFunction();
+
+Process playFunction();
+
+MoveResults move();
+
+void batRandom();
+
+Boolean shoot();
+
+Boolean checkBoundaries();
+
 Boolean checkEmptySpace();
 
-/**
- *Load stated board by the user
- */
+Boolean getDirection();
+
 void OptionLoadBoard();
 
-/**
- *Prints out the display menu
- */
 void displayGameMenu();
 
-Position batRandom();
 
-Boolean loadFunction();
-
-Boolean initFunction();
 
 #endif

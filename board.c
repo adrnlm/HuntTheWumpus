@@ -41,8 +41,7 @@ Boolean board_PlacePlayer( Board board, Position position ) {
    return FALSE;
 }
 
-PlayerMove board_MovePlayer( Board board, Position playerPosition,
-			                       Position nextPosition ) {
+PlayerMove board_MovePlayer( Board board, Position playerPosition, Position nextPosition ) {
    if ( board[nextPosition.y][nextPosition.x] == board_PIT ||
         board[nextPosition.y][nextPosition.x] == board_WUMPUS ) {
      return board_PLAYER_KILLED;
@@ -51,7 +50,7 @@ PlayerMove board_MovePlayer( Board board, Position playerPosition,
              nextPosition.x >= BOARD_WIDTH ||
             nextPosition.x < 0 ||
             nextPosition.y < 0 ) {
-     return board_OUTSIDE_BOUNDS;
+              return board_OUTSIDE_BOUNDS;
    }
    else if ( board[nextPosition.y][nextPosition.x] == board_EMPTY ||
              board[nextPosition.y][nextPosition.x] == board_TRAVERSED ) {
