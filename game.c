@@ -156,28 +156,32 @@ Process playFunction(Board board, Player * player, char *playInput) {
 	getInput(displayPlayMenu, playInput, MAX_PLAY_INPUT);
 	if ( playerChoice(playInput) == choice_quit )
 		return process_quit;
-	firstChar = strtok( playInput, " ");
-	secondChar = strtok(NULL, " \n");
-	if ( firstChar != NULL ) {
-		if ( getDirection(firstChar, &moveDirection)){
-			playerNextPosition = player_GetNextPosition( playerCurrentPosition, moveDirection );
-			moveResult = move(board, player, playerCurrentPosition, playerNextPosition);
-			if ( moveResult == killed )
-				return process_end;
-			else if ( moveResult == out_of_bounds)
-				return invalid_space;
+	else {
+		firstChar = strtok( playInput, " ");
+		secondChar = strtok(NULL, "\n");
+		if ( firstChar != NULL ) {
+			if ( getDirection(firstChar, &moveDirection)){
+				playerNextPosition = player_GetNextPosition( playerCurrentPosition, moveDirection );
+				moveResult = move(board, player, playerCurrentPosition, playerNextPosition);
+				if ( moveResult == killed )
+					 return process_end;
+				else if ( moveResult == out_of_bounds)
+					 return invalid_space;
+				else
+					 return process_success;
+			}
+			else if ( playerChoice(firstChar) == choice_shoot && getDirection(secondChar, &shootDirection) ) {
+				if ( shoot(board, player, shootDirection))
+					 return process_end;
+				else
+					 	return process_success;
+			}
 			else
-				return process_success;
-		}
-		else if ( playerChoice(firstChar) == choice_shoot && getDirection(secondChar, &shootDirection) ) {
-			if ( shoot(board, player, shootDirection))
-				return process_end;
+				 return process_fail;
 		}
 		else
-			return process_fail;
+			 return process_fail;
 	}
-	else
-		return process_fail;
 }
 
 /*Function to check movement in game and return a result*/
