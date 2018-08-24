@@ -53,7 +53,7 @@ void game_PlayGame(){
 		if ( playChoice == process_end ) {
 			return;
 		}
-		else if ( playChoice == process_success )
+		else if ( playChoice == process_success || playChoice == invalid_space)
 			continue;
 		else
 			return;
@@ -165,7 +165,7 @@ Process playFunction(Board board, Player * player, char *playInput) {
 			if ( moveResult == killed )
 				return process_end;
 			else if ( moveResult == out_of_bounds)
-				return process_fail;
+				return invalid_space;
 			else
 				return process_success;
 		}

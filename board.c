@@ -105,12 +105,12 @@ void board_DisplayWarnings( Board board, Position position ) {
                       "You smell a wumpus!" };
   Boolean checkPrint[] = { FALSE, FALSE, FALSE };
 
-  for ( loopX = position.x-1;
-        loopX>=0 && ( loopX<=maxScanX && loopX<BOARD_WIDTH );
-          loopX++ ) {
-    for ( loopY = position.y-1;
-          loopY>=0 && ( loopY<=maxScanY && loopY<BOARD_HEIGHT );
-            loopY++ ) {
+  for ( loopY = position.y-1;
+        loopY>=0 && ( loopY<=maxScanY && loopY<BOARD_WIDTH );
+          loopY++ ) {
+    for ( loopX = position.x-1;
+          loopX>=0 && ( loopX<=maxScanX && loopX<BOARD_HEIGHT );
+            loopX++ ) {
       int warningType = 2;
         do {
           if ( board[loopY][loopX] == warningType && checkPrint[warningType-2] == FALSE ) {
