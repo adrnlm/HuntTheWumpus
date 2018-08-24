@@ -100,18 +100,15 @@ void board_DisplayWarnings( Board board, Position position ) {
   int loopY;
   int maxScanX = position.x+1;
   int maxScanY = position.y+1;
+  int warningType;
   char *warning[] = { "You hear flapping!",
                       "You feel a breeze!",
                       "You smell a wumpus!" };
   Boolean checkPrint[] = { FALSE, FALSE, FALSE };
 
-  for ( loopY = position.y-1;
-        loopY>=0 && ( loopY<=maxScanY && loopY<BOARD_WIDTH );
-          loopY++ ) {
-    for ( loopX = position.x-1;
-          loopX>=0 && ( loopX<=maxScanX && loopX<BOARD_HEIGHT );
-            loopX++ ) {
-      int warningType = 2;
+  for ( loopX = position.x-1; loopX<=maxScanX && loopX<BOARD_WIDTH; loopX++ ) {
+    for ( loopY = position.y-1; loopY<=maxScanY && loopY<BOARD_HEIGHT; loopY++ ) {
+      warningType = 2;
         do {
           if ( board[loopY][loopX] == warningType && checkPrint[warningType-2] == FALSE ) {
             printf("%s ", warning[warningType-2]);
