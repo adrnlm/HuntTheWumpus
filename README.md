@@ -6,3 +6,5 @@ to the source code availability the game has since been ported to various progra
 graphical versions. It has been cited as an early example of a survival horror game.
 
 This is a clone of a simpler version of the original game.
+
+Bug where in play function, spaces besided intended input eg; <CORRECT_INPUT><empty_space><RANDOM_INPUT> & <CORRECT_INPUT><empty_space> is accepted
