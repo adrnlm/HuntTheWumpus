@@ -157,9 +157,8 @@ Process playFunction(Board board, Player * player, char *playInput) {
 	if ( playerChoice(playInput) == choice_quit )
 		return process_quit;
 	else {
-		firstChar = strtok( playInput, " ");
-		secondChar = strtok(NULL, "\n");
-		if ( firstChar != NULL ) {
+
+		if ( strncmp(playInput, "", USER_MAX_INPUT) != TRUE ) {
 			if ( getDirection(playInput, &moveDirection)){
 				playerNextPosition = player_GetNextPosition( playerCurrentPosition, moveDirection );
 				moveResult = move(board, player, playerCurrentPosition, playerNextPosition);
@@ -170,8 +169,10 @@ Process playFunction(Board board, Player * player, char *playInput) {
 				else
 					 return process_success;
 			}
-			else if ( secondChar != NULL ){
-				if ( playerChoice(firstChar) == choice_shoot && getDirection(secondChar, &shootDirection) ) {
+			else if ( strncmp(playInput, "", USER_MAX_INPUT) != TRUE ){
+				firstChar = strtok( playInput, " \n");
+				secondChar = strtok(NULL, "\n");
+				if ( playerChoice(firstChar) == choice_shoot && ( secondChar!=NULL && getDirection(secondChar, &shootDirection))) {
 					if ( shoot(board, player, shootDirection))
 						 return process_end;
 					else
