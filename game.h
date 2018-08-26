@@ -22,10 +22,10 @@
 #define COMMAND_WEST_SHORTCUT "w"
 #define COMMAND_SHOOT "shoot"
 #define COMMAND_QUIT "quit"
-#define USER_MAX_INPUT ( EXTRA_SPACES + 10 )
-#define MAX_LOAD_INPUT ( EXTRA_SPACES + 6 )
-#define MAX_INIT_INPUT ( EXTRA_SPACES + 8 )
-#define MAX_PLAY_INPUT ( EXTRA_SPACES + 7 )
+#define USER_MAX_INPUT ( EXTRA_SPACES + 15 )
+#define MAX_LOAD_INPUT ( EXTRA_SPACES + 15 )
+#define MAX_INIT_INPUT ( EXTRA_SPACES + 15 )
+#define MAX_PLAY_INPUT ( EXTRA_SPACES + 15 )
 
 #define displayLoadMenu "At this stage of the program, only two commands are acceptable:\nload <g>\nquit\n\n Please enter your choice: "
 #define displayInitMenu "At this stage of the program, only two commands are acceptable:\ninit <x>,<y>\nquit\n\nPlease enter your choice: "

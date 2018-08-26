@@ -170,7 +170,7 @@ Process playFunction(Board board, Player * player, char *playInput) {
 					 return process_success;
 			}
 			else if ( strncmp(playInput, "", USER_MAX_INPUT) != TRUE ){
-				firstChar = strtok( playInput, " \n");
+				firstChar = strtok( playInput, " ");
 				secondChar = strtok(NULL, "\n");
 				if ( playerChoice(firstChar) == choice_shoot && ( secondChar!=NULL && getDirection(secondChar, &shootDirection))) {
 					if ( shoot(board, player, shootDirection))
