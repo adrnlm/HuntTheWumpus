@@ -63,6 +63,8 @@ void game_PlayGame(){
 
 /*Checks if the player input is a valid choice*/
 Choice playerChoice(char * input) {
+	if(input == NULL)
+		return choice_invalid;
 	if ( strncmp(input, COMMAND_QUIT, USER_MAX_INPUT) == 0 )
 		return choice_quit;
 	else if ( strncmp(input, COMMAND_LOAD, USER_MAX_INPUT) == 0 )
@@ -157,11 +159,11 @@ Process playFunction(Board board, Player * player, char *playInput) {
 	if ( playerChoice(playInput) == choice_quit )
 		return process_quit;
 	else {
-
 		if ( strncmp(playInput, "", USER_MAX_INPUT) != TRUE ) {
 			if ( getDirection(playInput, &moveDirection)){
 				playerNextPosition = player_GetNextPosition( playerCurrentPosition, moveDirection );
 				moveResult = move(board, player, playerCurrentPosition, playerNextPosition);
+
 				if ( moveResult == killed )
 					 return process_end;
 				else if ( moveResult == out_of_bounds)
