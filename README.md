@@ -8,4 +8,4 @@ graphical versions. It has been cited as an early example of a survival horror g
 This is a clone of a simpler version of the original game.
 
 Upcoming patch
-- using <strtol> instead of <atoi>
+- using <<strtol>> instead of <<atoi>>
