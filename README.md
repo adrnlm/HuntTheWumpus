@@ -7,4 +7,5 @@ graphical versions. It has been cited as an early example of a survival horror g
 
 This is a clone of a simpler version of the original game.
 
-Upcoming fix - using <strtol> instead of <atoi>
+Upcoming patch
+- using <strtol> instead of <atoi>
